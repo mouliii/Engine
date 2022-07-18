@@ -140,7 +140,7 @@ void ImGuiLayer::on_game_tick(TimeStep)
 								
 								float pt[2] = { local_points[w].x, local_points[w].y};
 								std::string drag_float_name = "point" + std::to_string(w);
-								ImGui::DragFloat2(drag_float_name.c_str(), pt, 1.f, -INFINITY, INFINITY, "%f", 1.f);
+								ImGui::DragFloat2(drag_float_name.c_str(), pt, 0.5f, -INFINITY, INFINITY, "%f", 1.f);
 								local_points[w] = {pt[0], pt[1]};
 							}
 							
