@@ -240,11 +240,10 @@ void ImGuiLayer::on_game_tick(TimeStep)
 								if (this->construct_shape(e))
 								{
 									
-									if (&(e->get_component<ShapeComponent>()))
-									{
-										e->add_component<CollisionComponent>(&(e->get_component<ShapeComponent>()));
-										ImGui::CloseCurrentPopup();
-									}
+								
+									e->add_component<CollisionComponent>(&(e->get_component<ShapeComponent>()));
+									ImGui::CloseCurrentPopup();
+									
 								}
 							}
 							else
@@ -299,12 +298,9 @@ void ImGuiLayer::on_game_tick(TimeStep)
 							{
 								if (this->construct_shape(e))
 								{
-
-									if (&(e->get_component<ShapeComponent>()))
-									{
-										e->add_component<DisplayComponent>(&e->get_component<ShapeComponent>());
-										ImGui::CloseCurrentPopup();
-									}
+									e->add_component<DisplayComponent>(&e->get_component<ShapeComponent>());
+									ImGui::CloseCurrentPopup();
+									
 								}
 							}
 							else
