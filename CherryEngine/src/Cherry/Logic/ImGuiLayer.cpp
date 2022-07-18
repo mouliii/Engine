@@ -135,6 +135,7 @@ void ImGuiLayer::on_game_tick(TimeStep)
 							shape->set_scale(scale);
 							std::vector<vec2f> local_points;
 							shape->get_local_points(local_points);
+
 							for (size_t w = 0; w < local_points.size(); w++)
 							{
 								
