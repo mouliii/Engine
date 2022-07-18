@@ -2,12 +2,16 @@
 #include <unordered_map>
 #include <memory>
 
-
 #include "SandBoxBase.h"
+#include "Components.h"
+#include "../Physics/Shape/Polygon.h"
+
 
 class CherryEngine
 {
 public:
+
+
 	CherryEngine(const CherryEngine&) = delete;
 
 	static CherryEngine& get()
@@ -23,8 +27,9 @@ public:
 	static int run() { return get().i_run(); }
 	static int destroy() { return get().i_destroy(); }
 
-	static const SandBoxBase* get_layer(const std::string& name) { return get().i_get_layer(name); }
-	static const Window* get_render_window() { return get().i_get_render_window(); }
+	static SandBoxBase* get_layer(const std::string& name) { return get().i_get_layer(name); }
+	static Window* get_render_window() { return get().i_get_render_window(); }
+	static OrthoCamera* get_ortho_camera() { return get().i_get_ortho_camera(); }
 
 private:
 
@@ -33,18 +38,19 @@ private:
 	int i_run();
 	int i_destroy();
 
-	const SandBoxBase* i_get_layer(const std::string& name);
-	const Window* i_get_render_window() const;
+	SandBoxBase* i_get_layer(const std::string& name);
+	Window* i_get_render_window() const;
+	OrthoCamera* i_get_ortho_camera() const;
 
 	CherryEngine() {}
 
 	bool initialized = false;
-
 	float dt;
 
 	std::unordered_map<std::string, SandBoxBase*> layers;
 
 	Window* window;
+
 	Renderer* renderer;
 	OrthoCamera* orthocamera;
 };

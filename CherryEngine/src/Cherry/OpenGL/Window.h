@@ -4,6 +4,7 @@
 #include "GLFW/glfw3.h"
 #include "Event.h"
 #include "Rendering/Renderer.h"
+#include "../Maths/Vecs.h"
 
 typedef const float& TimeStep;
 
@@ -13,13 +14,21 @@ public:
 	
 	Window();
 	bool window_should_close() const;
-	
+
+	void poll_events() const;
 	void wait_events() const;
 	const std::vector<Event>& get_events() const;
-
+	
 	// Get time between frames
 	TimeStep get_timestep();
-	float get_fps();
+	float get_fps() const;
+
+	vec2i get_size()  const;
+	vec2f get_sizef() const;
+
+	void set_title(const std::string& title);
+
+	GLFWwindow* _get_glfw_window();
 
 	~Window();
 
@@ -27,11 +36,12 @@ public:
 private:
 
 	void init();
-	void poll_events() const;
+	
 
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 	static void cursor_callback(GLFWwindow* window, double xpos, double ypos);
 	static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
+	static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 
 private:
 

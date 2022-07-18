@@ -30,6 +30,10 @@ struct vec2
 		this->operator/=(this->lenght());
 	}
 
+	float dot(const vec2<T>& other)
+	{
+		return this->x * other.x + this->y * other.y;
+	}
 
 
 	vec2<T>& operator=(const vec2<T>& other)

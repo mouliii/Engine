@@ -1,31 +1,9 @@
-﻿Shader.obj : error LNK2001: unresolved external symbol __imp___glewUniformMatrix3fv
-Shader.obj : error LNK2001: unresolved external symbol __imp___glewUseProgram
-Shader.obj : error LNK2001: unresolved external symbol __imp___glewGetShaderiv
-Shader.obj : error LNK2001: unresolved external symbol __imp___glewCompileShader
-Shader.obj : error LNK2001: unresolved external symbol __imp___glewCreateShader
-Shader.obj : error LNK2001: unresolved external symbol __imp___glewCreateProgram
-Shader.obj : error LNK2001: unresolved external symbol __imp___glewUniform1i
-Shader.obj : error LNK2001: unresolved external symbol __imp___glewGetShaderInfoLog
-Shader.obj : error LNK2001: unresolved external symbol __imp___glewGetProgramiv
-Shader.obj : error LNK2001: unresolved external symbol __imp___glewUniform1f
-Shader.obj : error LNK2001: unresolved external symbol __imp___glewGetUniformLocation
-Shader.obj : error LNK2001: unresolved external symbol __imp___glewAttachShader
-Shader.obj : error LNK2001: unresolved external symbol __imp___glewShaderSource
-Shader.obj : error LNK2001: unresolved external symbol __imp___glewUniformMatrix4fv
-Shader.obj : error LNK2001: unresolved external symbol __imp___glewGetProgramInfoLog
-Shader.obj : error LNK2001: unresolved external symbol __imp___glewUniform3f
-Shader.obj : error LNK2001: unresolved external symbol __imp___glewDeleteShader
-Shader.obj : error LNK2001: unresolved external symbol __imp___glewLinkProgram
-Shader.obj : error LNK2001: unresolved external symbol __imp___glewUniform4f
-IndexBuffer.obj : error LNK2001: unresolved external symbol __imp___glewBindBuffer
-IndexBuffer.obj : error LNK2001: unresolved external symbol __imp___glewBufferData
-IndexBuffer.obj : error LNK2001: unresolved external symbol __imp___glewGenBuffers
-IndexBuffer.obj : error LNK2001: unresolved external symbol __imp___glewDeleteBuffers
-Window.obj : error LNK2001: unresolved external symbol __imp_glewInit
-VertexBuffer.obj : error LNK2001: unresolved external symbol __imp___glewBufferSubData
-VertexArray.obj : error LNK2001: unresolved external symbol __imp___glewEnableVertexAttribArray
-VertexArray.obj : error LNK2001: unresolved external symbol __imp___glewBindVertexArray
-VertexArray.obj : error LNK2001: unresolved external symbol __imp___glewVertexAttribPointer
-VertexArray.obj : error LNK2001: unresolved external symbol __imp___glewDeleteVertexArrays
-VertexArray.obj : error LNK2001: unresolved external symbol __imp___glewGenVertexArrays
-C:\Users\rasa_\source\repos\CherryEngine\x64\Release\CherryEngine.exe : fatal error LNK1120: 30 unresolved externals
+﻿  CrEngine.cpp
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  Generating code
+  824 of 2630 functions (31.3%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    276 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\rasa_\source\repos\CherryEngine\x64\Release\vc120.pdb'; linking object as if no debug info
+  CherryEngine.vcxproj -> C:\Users\rasa_\source\repos\CherryEngine\x64\Release\CherryEngine.exe

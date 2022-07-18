@@ -1,5 +1,6 @@
 #pragma once
-#include <math.h>
+//#include <math.h>
+#include <cmath>
 #include "Vecs.h"
 
 template<uint32_t size>
@@ -190,6 +191,8 @@ public:
 	}
 
 
+
+
 	static mat3 ortho(float left, float right, float bottom, float top)
 	{
 		return
@@ -245,17 +248,17 @@ public:
 	vec3<T> operator*(const vec3<T>& v) const
 	{
 		vec3<T> out;
-		out.x = cells[0][0] * v.x + cells[0][1] * v.y + cells[0][2] * v.z;
-		out.y = cells[1][0] * v.x + cells[1][1] * v.y + cells[1][2] * v.z;
-		out.z = cells[2][0] * v.x + cells[2][1] * v.y + cells[2][2] * v.z;
-		return out;
+		out.x = cells[0][0] * v.x + cells[0][1] * v.y + cells[0][2] * v.z + cells[0][3];
+		out.y = cells[1][0] * v.x + cells[1][1] * v.y + cells[1][2] * v.z + cells[1][3];
+		out.z = cells[2][0] * v.x + cells[2][1] * v.y + cells[2][2] * v.z + cells[2][3];
+		return out;														 
 	}
 
 	vec2<T> operator*(const vec2<T>& v) const
 	{
 		vec2<T> out;
-		out.x = cells[0][0] * v.x + cells[0][1] * v.y + cells[0][2];
-		out.x = cells[1][0] * v.x + cells[1][1] * v.y + cells[1][2];
+		out.x = cells[0][0] * v.x + cells[0][1] * v.y + cells[0][2] + cells[0][3];
+		out.y = cells[1][0] * v.x + cells[1][1] * v.y + cells[1][2] + cells[1][3];
 
 		return out;
 	}
@@ -338,7 +341,7 @@ public:
 		return
 		{
 			cos(theta), -sin(theta), (T)0, (T)0,
-			sin(theta),	cos(theta), (T)0, (T)0,
+			sin(theta),	cos(theta),  (T)0, (T)0,
 			(T)0		 ,	(T)0		 , (T)1, (T)0,
 			(T)0		 ,  (T)0		 , (T)0, (T)1
 		};

@@ -29,6 +29,7 @@ constexpr std::size_t max_components = 32;
 using ComponentBitSet = std::bitset<max_components>;
 using ComponentArray = std::array<Component*, max_components>;
 
+enum class ComponentType;
 class Component
 {
 public:
@@ -38,15 +39,24 @@ public:
 	virtual void on_update_tick(TimeStep dt){}
 	virtual void on_draw_call(Window* render_window, Renderer* renderer) {}
 
+
 	virtual ~Component() {}
+
+	bool is_active() const { return active; }
+	void destroy() { active = false; }
+
+	ComponentType c_type;
+
+private:
+	bool active = true;
 };
 
 class Entity
 {
 public:
 
-	Entity()
-	{}
+	Entity() {}
+	
 
 	virtual void on_init() {}
 	virtual void on_update_tick(TimeStep dt) {}
@@ -55,8 +65,24 @@ public:
 	bool is_active() const { return active; }
 	void destroy() { active = false; }
 
+	void set_name(std::string name)
+	{
+		this->name = name;
+		id = (uint64_t)&this->name;
+	}
+
+	const std::string& get_name() const
+	{
+		return name;
+	}
+
+	const uint64_t get_id() const
+	{
+		return id;
+	}
+
 	template <typename T>
-	bool has_component() const
+	bool has_component()
 	{
 		return ComponentBitSet[get_component_type_id<T>()];
 	}
@@ -72,6 +98,7 @@ public:
 		component_bitset[get_component_type_id<T>()] = true;
 
 		c->on_init();
+		
 		return *c;
 	}
 
@@ -82,12 +109,18 @@ public:
 		return *static_cast<T*>(ptr);
 	}
 
+	const ComponentArray* const get_all_components() const
+	{
+		return &component_array;
+	}
+
 private:
 
 	friend class Manager;
 	
 	void update(TimeStep dt)
 	{
+	
 		for (auto& component : components)
 		{
 			component->on_update_tick(dt);
@@ -106,6 +139,7 @@ private:
 	}
 
 
+
 private:
 
 	bool active = true;
@@ -113,6 +147,10 @@ private:
 
 	ComponentArray component_array;
 	ComponentBitSet component_bitset;
+
+	std::string name;
+	uint64_t id;
+
 };
 
 
@@ -124,7 +162,9 @@ public:
 	{
 		for (auto& entity : entities)
 		{
+
 			entity->update(dt);
+	
 		}
 	}
 	void draw(Window* render_window, Renderer* renderer)
@@ -138,7 +178,8 @@ public:
 	// Erase every entity that is not active anymore (destroy() called)
 	void refresh()
 	{
-		entities.erase(std::remove_if(std::begin(entities), std::end(entities),
+		
+		entities.erase(std::remove_if(std::begin(entities), std::end(entities),	
 			[](const std::unique_ptr<Entity>& entity)
 			{
 				return !entity->is_active();
@@ -147,13 +188,20 @@ public:
 
 	}
 	template<typename EntityDerived=Entity>
-	EntityDerived& add_entity()
+	EntityDerived& add_entity(std::string name)
 	{
 		EntityDerived* e = new EntityDerived();
+		e->set_name(name);
 		std::unique_ptr<EntityDerived> uq_ptr{ e };
 		entities.emplace_back(std::move(uq_ptr));
 		return *e;
 	}
+
+	const std::vector<std::unique_ptr<Entity>>& get_entities() const
+	{
+		return entities;
+	}
+
 
 private:
 	std::vector<std::unique_ptr<Entity>> entities;

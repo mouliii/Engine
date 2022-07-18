@@ -5,6 +5,8 @@
 /*
 Baseclass for layouts for the engine to call.
 */
+
+
 class SandBoxBase
 {
 public:
@@ -13,8 +15,13 @@ public:
 	virtual void on_game_tick(TimeStep delta_time) {}
 	virtual void on_draw_call(Window* render_window, Renderer* renderer) {}
 	virtual void on_game_event(EventVector events) {}
+	virtual void on_loop_end() {}
+	Manager* get_manager() 
+	{
+		return &manager;
+	}
 
-private:
+protected:
 
 	friend class CherryEngine;
 	virtual void update_manager(TimeStep dt) final
@@ -27,6 +34,8 @@ private:
 	{
 		manager.draw(render_window, renderer);
 	}
+
+
 
 protected:
 	Manager manager;

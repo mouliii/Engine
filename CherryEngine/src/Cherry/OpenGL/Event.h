@@ -4,7 +4,8 @@
 enum class EventType
 {
 	KEYBOARD=1,
-	MOUSE
+	MOUSE,
+	SCROLL
 };
 
 struct KeyboardEvent
@@ -24,11 +25,19 @@ struct MouseEvent
 	int mods;
 };
 
+struct ScrollEvent
+{
+	float x_offset;
+	// y_offset is the normal mouse wheel offset
+	float y_offset;
+};
+
 struct Event
 {
 	EventType type;
 	KeyboardEvent keyboard_ev;
 	MouseEvent mouse_ev;
+	ScrollEvent scroll_ev;
 };
 
 

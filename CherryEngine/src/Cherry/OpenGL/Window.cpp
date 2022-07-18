@@ -42,9 +42,29 @@ TimeStep Window::get_timestep()
 	return dt;
 }
 
-float Window::get_fps()
+float Window::get_fps() const
 {
 	return 1.f / this->dt;
+}
+
+vec2i Window::get_size() const
+{
+	return { (int)width, (int)height };
+}
+
+vec2f Window::get_sizef() const
+{
+	return { (float)width, (float)height };
+}
+
+void Window::set_title(const std::string& title)
+{
+	glfwSetWindowTitle(this->gl_window, title.c_str());
+}
+
+GLFWwindow* Window::_get_glfw_window()
+{
+	return gl_window;
 }
 
 Window::~Window()
@@ -69,7 +89,7 @@ void Window::init()
 		glfwTerminate();
 		throw("gl not inited");
 	}
-
+	
 
 	glfwMakeContextCurrent(this->gl_window);
 
@@ -85,7 +105,7 @@ void Window::init()
 	glfwSetKeyCallback(this->gl_window, key_callback);
 	glfwSetCursorPosCallback(this->gl_window, cursor_callback);
 	glfwSetMouseButtonCallback(this->gl_window, mouse_button_callback);
-
+	glfwSetScrollCallback(this->gl_window, scroll_callback);
 	
 }
 
@@ -131,4 +151,16 @@ void Window::mouse_button_callback(GLFWwindow* window, int button, int action, i
 	e.mouse_ev.mods = mods;
 	e.type = EventType::MOUSE;
 	events.push_back(e);
+}
+
+void Window::scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+{
+	Event e;
+	e.type = EventType::SCROLL;
+
+	e.scroll_ev.x_offset = xoffset;
+	e.scroll_ev.y_offset = yoffset;
+
+	events.push_back(e);
+
 }

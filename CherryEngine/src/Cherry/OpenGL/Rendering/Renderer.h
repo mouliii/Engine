@@ -21,6 +21,7 @@ struct QuadVertex
 
 struct RenderData
 {
+	//orig : 15k
 	const uint32_t max_quad_count = 15000;
 	const uint32_t max_vertex_count = max_quad_count * 4;
 	const uint32_t max_indices_count = max_quad_count * 6;
@@ -48,7 +49,9 @@ public:
 
 
 	void draw_quad(const vec2f& pos, const vec2f& size, const vec4f& color);
+	void draw_quad(const std::vector<vec2f>& points, const vec4f& color);
 
+	void draw_poly(const std::vector<vec2f>& points, const vec4f& color);
 
 	void set_camera(OrthoCamera* ortho_camera);
 	void update_camera();

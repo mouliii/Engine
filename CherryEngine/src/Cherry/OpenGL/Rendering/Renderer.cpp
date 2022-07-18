@@ -131,6 +131,56 @@ void Renderer::draw_quad(const vec2f& pos, const vec2f& size, const vec4f& color
 	data.quad_index_count += 6;
 }
 
+void Renderer::draw_quad(const std::vector<vec2f>& points, const vec4f& color)
+{
+
+	if (data.quad_index_count >= data.max_indices_count)
+	{
+		end_batch();
+		flush();
+		begin_batch();
+	}
+
+
+
+	data.vertex_buffer_ptr->pos = points[0];
+	data.vertex_buffer_ptr->color = color;
+	data.vertex_buffer_ptr++;
+
+	data.vertex_buffer_ptr->pos = points[3];
+	data.vertex_buffer_ptr->color = color;
+	data.vertex_buffer_ptr++;
+	
+	data.vertex_buffer_ptr->pos = points[2];
+	data.vertex_buffer_ptr->color = color;
+	data.vertex_buffer_ptr++;
+
+	data.vertex_buffer_ptr->pos = points[1];
+	data.vertex_buffer_ptr->color = color;
+	data.vertex_buffer_ptr++;
+
+	data.quad_index_count += 6;
+}
+
+void Renderer::draw_poly(const std::vector<vec2f>& points, const vec4f& color)
+{
+	if (data.quad_index_count >= data.max_indices_count)
+	{
+		end_batch();
+		flush();
+		begin_batch();
+	}
+
+	for (size_t i = 0; i < points.size(); i++)
+	{
+		data.vertex_buffer_ptr->pos = points[i];
+		data.vertex_buffer_ptr->color = color;
+		data.vertex_buffer_ptr++;		
+	}
+
+	data.quad_index_count += 6;
+}
+
 void Renderer::set_camera(OrthoCamera* ortho_camera)
 {
 	ortho_cam = ortho_camera;
