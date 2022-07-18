@@ -237,7 +237,7 @@ void ImGuiLayer::on_game_tick(TimeStep)
 							if (!&(e->get_component<ShapeComponent>()))
 							{
 								
-								if (this->construct_shape(e));
+								if (this->construct_shape(e))
 								{
 									
 									if (&(e->get_component<ShapeComponent>()))
@@ -297,7 +297,7 @@ void ImGuiLayer::on_game_tick(TimeStep)
 
 							if (!&(e->get_component<ShapeComponent>()))
 							{
-								if (this->construct_shape(e));
+								if (this->construct_shape(e))
 								{
 
 									if (&(e->get_component<ShapeComponent>()))
