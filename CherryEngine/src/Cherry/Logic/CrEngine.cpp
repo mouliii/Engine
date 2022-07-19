@@ -7,11 +7,14 @@ int CherryEngine::i_init()
 
 	window = new Window();
 
+	manager = new ECSManager();
+	
 	glfwSwapInterval(0);
 	renderer = new Renderer();
 	orthocamera = new OrthoCamera(0.f, 800.f, 0.f, 600.f);
 	renderer->set_camera(orthocamera);
 	initialized = true;
+
 
 
 	/* IMGUI INITIALIZATION */
@@ -52,16 +55,13 @@ int CherryEngine::i_run()
 		dt = window->get_timestep();
 		for (auto& it : layers)
 		{
-			it.second->update_manager(dt);
 			it.second->on_game_tick(dt);
-
 		}
 
 
 		for (auto& it : layers)
 		{
 			it.second->on_draw_call(window, renderer);
-			it.second->draw_manager(window, renderer);
 		}
 
 	
@@ -109,4 +109,9 @@ Window* CherryEngine::i_get_render_window() const
 OrthoCamera* CherryEngine::i_get_ortho_camera() const
 {
 	return orthocamera;
+}
+
+ECSManager* CherryEngine::i_get_manager() const
+{
+	return manager;
 }

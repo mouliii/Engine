@@ -55,7 +55,7 @@ Renderer::Renderer()
 }
 
 Renderer::~Renderer()
-{
+{ 
 	vao.unbind();
 	vbo.unbind();
 	ibo.unbind();

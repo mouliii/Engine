@@ -16,28 +16,14 @@ public:
 	virtual void on_draw_call(Window* render_window, Renderer* renderer) {}
 	virtual void on_game_event(EventVector events) {}
 	virtual void on_loop_end() {}
-	Manager* get_manager() 
-	{
-		return &manager;
-	}
+
 
 protected:
 
 	friend class CherryEngine;
-	virtual void update_manager(TimeStep dt) final
-	{
-		manager.refresh();
-		manager.update(dt);
-	}
-
-	virtual void draw_manager(Window* render_window, Renderer* renderer) final
-	{
-		manager.draw(render_window, renderer);
-	}
 
 
 
-protected:
-	Manager manager;
+	
 };
 

@@ -4,6 +4,7 @@
 
 #include "SandBoxBase.h"
 #include "Components.h"
+#include "EntityComponentSystem.h"
 #include "../Physics/Shape/Polygon.h"
 
 
@@ -30,7 +31,11 @@ public:
 	static SandBoxBase* get_layer(const std::string& name) { return get().i_get_layer(name); }
 	static Window* get_render_window() { return get().i_get_render_window(); }
 	static OrthoCamera* get_ortho_camera() { return get().i_get_ortho_camera(); }
+	static ECSManager* get_manager() { return get().i_get_manager(); }
+	
 
+	
+	
 private:
 
 	int i_init();
@@ -41,6 +46,7 @@ private:
 	SandBoxBase* i_get_layer(const std::string& name);
 	Window* i_get_render_window() const;
 	OrthoCamera* i_get_ortho_camera() const;
+	ECSManager* i_get_manager() const;
 
 	CherryEngine() {}
 
@@ -53,4 +59,5 @@ private:
 
 	Renderer* renderer;
 	OrthoCamera* orthocamera;
-};
+	ECSManager* manager;
+}; 

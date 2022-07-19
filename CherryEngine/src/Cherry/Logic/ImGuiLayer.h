@@ -19,6 +19,8 @@ public:
 
 private:
 
+	void entity_tree();
+
 	bool construct_shape(Entity* e);
 	bool delete_item_on_right_click();
 };
