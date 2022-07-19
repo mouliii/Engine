@@ -295,6 +295,7 @@ public:
 		signature1.set(CherryEngine::get_manager()->get_component_type<DisplayComponent>());
 		CherryEngine::get_manager()->set_system_signature<DrawSystem>(signature1);
 
+		
 		std::vector<vec2f> tri;
 		tri.push_back({ 10.f, 10.f });
 		tri.push_back({ 80.f, 80.f });
@@ -377,6 +378,8 @@ public:
 		ShapeComponent& shape = CherryEngine::get_manager()->get_component<ShapeComponent>(player_object);
 		CollisionSystem* system = static_cast<CollisionSystem*>(CherryEngine::get_manager()->get_system_manager()->get_system<CollisionSystem>().get());
 		
+
+		system->on_game_tick(delta_time);
 		
 		if (KeyBoard::is_key_pressed(GLFW_KEY_S, window))
 			system->move_and_collide(player_object, mat4f::rotate_z(ortho_cam->get_rotation()) * vec2f(0.f, -500.f * delta_time));

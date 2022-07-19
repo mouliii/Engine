@@ -435,7 +435,7 @@ void ImGuiLayer::create_display_component(Entity entity)
 			{
 				if (this->construct_shape(entity))
 				{
-					CherryEngine::get_manager()->add_component<DisplayComponent>(entity, DisplayComponent{ &CherryEngine::get_manager()->get_component<ShapeComponent>(entity) });
+					CherryEngine::get_manager()->add_component<DisplayComponent>(entity, DisplayComponent{ &CherryEngine::get_manager()->get_component<ShapeComponent>(entity), {1.f, 1.f, 1.f, 1.f}, true });
 					ImGui::CloseCurrentPopup();
 
 				}
@@ -445,7 +445,7 @@ void ImGuiLayer::create_display_component(Entity entity)
 
 				if (ImGui::Button("create"))
 				{
-					CherryEngine::get_manager()->add_component<DisplayComponent>(entity, DisplayComponent{ &CherryEngine::get_manager()->get_component<ShapeComponent>(entity) });
+					CherryEngine::get_manager()->add_component<DisplayComponent>(entity, DisplayComponent{ &CherryEngine::get_manager()->get_component<ShapeComponent>(entity), {1.f, 1.f, 1.f, 1.f}, true });
 					ImGui::CloseCurrentPopup();
 				}
 			}
