@@ -43,6 +43,7 @@
     <ClCompile Include="src\Cherry\OpenGL\Rendering\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="src\Cherry\OpenGL\Rendering\Buffers\VertexArray.cpp" />
     <ClCompile Include="src\Cherry\OpenGL\Rendering\Texture.cpp" />
+    <ClCompile Include="src\Cherry\Logic\Systems.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Cherry\Logic\ImGuiLayer.h" />
@@ -79,6 +80,7 @@
     <ClInclude Include="src\Cherry\OpenGL\Rendering\Texture.h" />
     <ClInclude Include="src\Cherry\Physics\Shape\Polygon.h" />
     <ClInclude Include="src\Cherry\Physics\Shape\Rectangle.h" />
+    <ClInclude Include="src\Cherry\Logic\Systems.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\fragment_shader.shader" />

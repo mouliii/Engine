@@ -87,6 +87,9 @@
     <ClCompile Include="src\Cherry\Logic\ImGuiLayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Cherry\Logic\Systems.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Cherry\CherryI.h">
@@ -189,6 +192,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Cherry\Logic\ImGuiLayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cherry\Logic\Systems.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
