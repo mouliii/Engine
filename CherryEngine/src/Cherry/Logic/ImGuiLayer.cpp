@@ -56,6 +56,8 @@ void ImGuiLayer::set_render_data()
 
 void ImGuiLayer::entity_tree()
 {
+
+
 	auto& sm = CherryEngine::get_manager()->get_system_manager();
 	auto& systems = sm->get_systems();
 
@@ -120,286 +122,46 @@ void ImGuiLayer::entity_tree()
 		{
 
 			ImGui::Indent(10.f);
-			//ImGui::PushID(j + 10);
-			if (CherryEngine::get_manager()->has_component<ShapeComponent>(entity))
-			{
-				ShapeComponent& sc = CherryEngine::get_manager()->get_component<ShapeComponent>(entity);
-
-				const char* component_name = CherryEngine::get_manager()->get_component_name<ShapeComponent>();
-
-
-
-				bool component_list = ImGui::CollapsingHeader(component_name);
-				// DELETION OF COMPONENTS TODODO
-				if (delete_item_on_right_click())
-				{
-					CherryEngine::get_manager()->remove_component<ShapeComponent>(entity);
-					continue;
-				}
-				
-				if (component_list)
-				{
-	
-					Polygon* shape = &sc.shape;
-
-					vec2f translation = shape->get_translation();
-					float tr[2] = { translation.x, translation.y };
-					ImGui::DragFloat2("translation", tr, 10.f, -INFINITY, INFINITY, "%f", 1.f);
-					shape->set_translation({ tr[0], tr[1] });
-
-					float rotation = shape->get_rotation();
-					ImGui::DragFloat("rotation", &rotation, .05f, -3.141f, 3.141f, "%f", 1.f);
-					shape->set_rotation(rotation);
-
-					float scale = shape->get_scale();
-					ImGui::DragFloat("scale", &scale, .1f, 0, INFINITY, "%f", 1.f);
-					shape->set_scale(scale);
-					std::vector<vec2f> local_points;
-					shape->get_local_points(local_points);
-
-					for (size_t w = 0; w < local_points.size(); w++)
-					{
-
-						float pt[2] = { local_points[w].x, local_points[w].y };
-						std::string drag_float_name = "point" + std::to_string(w);
-						ImGui::DragFloat2(drag_float_name.c_str(), pt, 0.5f, -INFINITY, INFINITY, "%f", 1.f);
-						local_points[w] = { pt[0], pt[1] };
-					}
-
-
-					if (ImGui::Button("add point"))
-					{
-
-						local_points.push_back(vec2f(0.f, 0.f));
-
-					}
-					shape->set_local_points(local_points);
-
-				}
-			}
-			/*
-			if (component_list)
-			{
-
-				switch (c->c_type)
-				{
-
-				case ComponentType::ShapeComponent:
-				{
-
-					ShapeComponent* sc = static_cast<ShapeComponent*>(c);
-					Polygon* shape = sc->get_shape();
-
-					vec2f translation = shape->get_translation();
-					float tr[2] = { translation.x, translation.y };
-					ImGui::DragFloat2("translation", tr, 10.f, -INFINITY, INFINITY, "%f", 1.f);
-					shape->set_translation({ tr[0], tr[1] });
-
-					float rotation = shape->get_rotation();
-					ImGui::DragFloat("rotation", &rotation, .05f, -3.141f, 3.141f, "%f", 1.f);
-					shape->set_rotation(rotation);
-
-					float scale = shape->get_scale();
-					ImGui::DragFloat("scale", &scale, .1f, 0, INFINITY, "%f", 1.f);
-					shape->set_scale(scale);
-					std::vector<vec2f> local_points;
-					shape->get_local_points(local_points);
-
-					for (size_t w = 0; w < local_points.size(); w++)
-					{
-
-						float pt[2] = { local_points[w].x, local_points[w].y };
-						std::string drag_float_name = "point" + std::to_string(w);
-						ImGui::DragFloat2(drag_float_name.c_str(), pt, 0.5f, -INFINITY, INFINITY, "%f", 1.f);
-						local_points[w] = { pt[0], pt[1] };
-					}
-
-
-					if (ImGui::Button("add point"))
-					{
-
-						local_points.push_back(vec2f(0.f, 0.f));
-
-					}
-					shape->set_local_points(local_points);
-
-					break;
-				}
-				case ComponentType::CollisionComponent:
-				{
-
-					CollisionComponent* cc = static_cast<CollisionComponent*>(c);
-
-					const std::bitset<COLLISION_MASK_LAYER_COUNT>& collision_mask = cc->get_collision_mask();
-					ImGui::Text("collision mask");
-
-					for (int j = 1; j <= COLLISION_MASK_LAYER_COUNT; j++)
-					{
-						bool b = collision_mask[j - 1];
-
-						ImGui::Checkbox(std::to_string(j).c_str(), &b);
-
-						cc->set_collision_mask_bit(j - 1, b);
-
-						if (j == COLLISION_MASK_LAYER_COUNT || j == COLLISION_MASK_LAYER_COUNT / 2)
-							continue;
-						ImGui::SameLine();
-
-					}
-
-					break;
-
-				}
-
-				case ComponentType::DisplayComponent:
-				{
-
-					DisplayComponent* dc = static_cast<DisplayComponent*>(c);
-
-					float col[4] = { dc->color.x, dc->color.y, dc->color.z, dc->color.w };
-
-					ImGui::ColorPicker4("color", col);
-					//ImGui::SliderFloat3()
-					dc->color = { col[0], col[1], col[2], col[3] };
-
-					ImGui::Checkbox("visible", &dc->visible);
-
-					break;
-				}
-
-				}
-				*/
-
-				
-
-				//ImGui::PopID();
-
+			
+			shape_component_button(entity);
+			display_component_button(entity);
+			collision_component_button(entity);
+			
 
 
 			ImGui::Indent(-10.f);
-			/*
+			
 			if (ImGui::Button("+"))
 			{
 				ImGui::OpenPopup("entity_menu");
 
 			}
 			
+
 			if (ImGui::BeginPopup("entity_menu"))
 			{
 
-				if (!(e->has_component<CollisionComponent>()))
-				{
-
-					if (ImGui::Button("CollisionComponent"))
-					{
-						ImGui::OpenPopup("add CollisionComponent");
-
-					}
-
-					ImVec2 center = ImGui::GetMainViewport()->GetCenter();
-					ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
-
-					if (ImGui::BeginPopupModal("add CollisionComponent", NULL, ImGuiWindowFlags_AlwaysAutoResize))
-					{
-
-						if (!(e->has_component<ShapeComponent>()))
-						{
-
-							if (this->construct_shape(e))
-							{
-
-
-								e->add_component<CollisionComponent>(&(e->get_component<ShapeComponent>()));
-								ImGui::CloseCurrentPopup();
-
-							}
-						}
-						else
-						{
-
-							if (ImGui::Button("create"))
-							{
-								e->add_component<CollisionComponent>(&e->get_component<ShapeComponent>());
-								//	ImGui::CloseCurrentPopup();
-							}
-						}
-						if (ImGui::Button("cancel", ImVec2(120, 0))) { ImGui::CloseCurrentPopup(); }
-						ImGui::EndPopup();
-					}
-
-				}
-
-
-				if (!(e->has_component<ShapeComponent>()))
-				{
-
-					if (ImGui::Button("ShapeComponent"))
-					{
-						ImGui::OpenPopup("add ShapeComponent");
-
-					}
-
-					if (ImGui::BeginPopupModal("add ShapeComponent", NULL, ImGuiWindowFlags_AlwaysAutoResize))
-					{
-
-
-						this->construct_shape(e);
-						if (ImGui::Button("cancel", ImVec2(120, 0))) { ImGui::CloseCurrentPopup(); }
-						ImGui::EndPopup();
-					}
-
-				}
-
-				if (!(e->has_component<DisplayComponent>()))
-				{
-
-					if (ImGui::Button("DisplayComponent"))
-					{
-						ImGui::OpenPopup("add DisplayComponent");
-
-					}
-
-					if (ImGui::BeginPopupModal("add DisplayComponent", NULL, ImGuiWindowFlags_AlwaysAutoResize))
-					{
-
-						if (!&(e->get_component<ShapeComponent>()))
-						{
-							if (this->construct_shape(e))
-							{
-								e->add_component<DisplayComponent>(&e->get_component<ShapeComponent>());
-								ImGui::CloseCurrentPopup();
-
-							}
-						}
-						else
-						{
-
-							if (ImGui::Button("create"))
-							{
-								e->add_component<DisplayComponent>(&e->get_component<ShapeComponent>());
-								ImGui::CloseCurrentPopup();
-							}
-						}
-						if (ImGui::Button("cancel", ImVec2(120, 0))) { ImGui::CloseCurrentPopup(); }
-						ImGui::EndPopup();
-					}
-				}
+				create_collision_component(entity);
+				create_display_component(entity);
+				create_shape_component(entity);
+				
 
 				ImGui::EndPopup();
 				
-			} */
+			} 
 
 		}
+	
 		ImGui::PopID();
 	}
 
 	ImGui::End();
 }
 
-bool ImGuiLayer::construct_shape(Entity* e)
+bool ImGuiLayer::construct_shape(Entity entity)
 {
 
-	/*
+	
 	static ShapeType selected_shape = ShapeType::None;
 
 	ImGui::Text("you can edit the exact shape later");
@@ -430,17 +192,17 @@ bool ImGuiLayer::construct_shape(Entity* e)
 			{
 				case ShapeType::Polygon:
 				{
-					e->add_component<ShapeComponent>(Polygon());
+					CherryEngine::get_manager()->add_component<ShapeComponent>(entity, ShapeComponent{Polygon()});
 					return true;
 				}
 				case ShapeType::Rectangle:
 				{
-					e->add_component<ShapeComponent>(Rectangle());
+					CherryEngine::get_manager()->add_component<ShapeComponent>(entity, ShapeComponent{Rectangle()});
 					return true;
 				}
 			}
 		}
-	} */
+	} 
 	return false;
 	
 }
@@ -465,4 +227,253 @@ bool ImGuiLayer::delete_item_on_right_click()
 		ImGui::EndPopup();
 	}
 	return false;
+}
+
+void ImGuiLayer::shape_component_button(Entity entity)
+{
+
+	if (CherryEngine::get_manager()->has_component<ShapeComponent>(entity))
+	{
+		ShapeComponent& sc = CherryEngine::get_manager()->get_component<ShapeComponent>(entity);
+
+		const char* component_name = CherryEngine::get_manager()->get_component_name<ShapeComponent>();
+
+
+
+		bool component_list = ImGui::CollapsingHeader(component_name);
+		// DELETION OF COMPONENTS TODODO
+		ImGui::PushID(component_name);
+		if (delete_item_on_right_click())
+		{
+			CherryEngine::get_manager()->remove_component<ShapeComponent>(entity);
+			return;
+		}
+		ImGui::PopID();
+		if (component_list)
+		{
+
+			Polygon* shape = &sc.shape;
+
+			vec2f translation = shape->get_translation();
+			float tr[2] = { translation.x, translation.y };
+			ImGui::DragFloat2("translation", tr, 10.f, -INFINITY, INFINITY, "%f", 1.f);
+			shape->set_translation({ tr[0], tr[1] });
+
+			float rotation = shape->get_rotation();
+			ImGui::DragFloat("rotation", &rotation, .05f, -3.141f, 3.141f, "%f", 1.f);
+			shape->set_rotation(rotation);
+
+			float scale = shape->get_scale();
+			ImGui::DragFloat("scale", &scale, .1f, 0, INFINITY, "%f", 1.f);
+			shape->set_scale(scale);
+			std::vector<vec2f> local_points;
+			shape->get_local_points(local_points);
+
+			for (size_t w = 0; w < local_points.size(); w++)
+			{
+
+				float pt[2] = { local_points[w].x, local_points[w].y };
+				std::string drag_float_name = "point" + std::to_string(w);
+				ImGui::DragFloat2(drag_float_name.c_str(), pt, 0.5f, -INFINITY, INFINITY, "%f", 1.f);
+				local_points[w] = { pt[0], pt[1] };
+			}
+
+
+			if (ImGui::Button("add point"))
+			{
+
+				local_points.push_back(vec2f(0.f, 0.f));
+
+			}
+			shape->set_local_points(local_points);
+
+		}
+	}
+}
+
+void ImGuiLayer::display_component_button(Entity entity)
+{
+	if (CherryEngine::get_manager()->has_component<DisplayComponent>(entity))
+	{
+		DisplayComponent& dc = CherryEngine::get_manager()->get_component<DisplayComponent>(entity);
+
+		const char* component_name = CherryEngine::get_manager()->get_component_name<DisplayComponent>();
+
+
+		bool component_list = ImGui::CollapsingHeader(component_name);
+		// DELETION OF COMPONENTS TODODO
+		
+		ImGui::PushID(component_name);
+		if (delete_item_on_right_click())
+		{
+			CherryEngine::get_manager()->remove_component<DisplayComponent>(entity);
+			return;
+		}
+		ImGui::PopID();
+
+		if (component_list)
+		{
+
+
+			float col[4] = { dc.color.x, dc.color.y, dc.color.z, dc.color.w };
+
+			ImGui::ColorPicker4("color", col);
+			//ImGui::SliderFloat3()
+			dc.color = { col[0], col[1], col[2], col[3] };
+
+			ImGui::Checkbox("visible", &dc.visible);
+
+			
+		}
+	}
+}
+
+void ImGuiLayer::collision_component_button(Entity entity)
+{
+	if (CherryEngine::get_manager()->has_component<CollisionComponent>(entity))
+	{
+		CollisionComponent& cc = CherryEngine::get_manager()->get_component<CollisionComponent>(entity);
+
+		const char* component_name = CherryEngine::get_manager()->get_component_name<CollisionComponent>();
+
+
+		bool component_list = ImGui::CollapsingHeader(component_name);
+		// DELETION OF COMPONENTS TODODO
+		
+		ImGui::PushID(component_name);
+		if (delete_item_on_right_click())
+		{
+			CherryEngine::get_manager()->remove_component<CollisionComponent>(entity);
+			return;
+		}
+		ImGui::PopID();
+
+		if (component_list)
+		{
+
+			const std::bitset<COLLISION_MASK_LAYER_COUNT>& collision_mask = cc.collision_mask;
+			ImGui::Text("collision mask");
+
+			for (int j = 1; j <= COLLISION_MASK_LAYER_COUNT; j++)
+			{
+				bool b = collision_mask[j - 1];
+
+				ImGui::Checkbox(std::to_string(j).c_str(), &b);
+
+				cc.set_collision_mask_bit(j - 1, b);
+
+				if (j == COLLISION_MASK_LAYER_COUNT || j == COLLISION_MASK_LAYER_COUNT / 2)
+					continue;
+				ImGui::SameLine();
+
+			}
+		}
+	}
+}
+
+void ImGuiLayer::create_collision_component(Entity entity)
+{
+	if (!(CherryEngine::get_manager()->has_component<CollisionComponent>(entity)))
+	{
+
+		if (ImGui::Button("CollisionComponent"))
+		{
+			ImGui::OpenPopup("add CollisionComponent");
+
+		}
+
+		ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+		ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+
+		if (ImGui::BeginPopupModal("add CollisionComponent", NULL, ImGuiWindowFlags_AlwaysAutoResize))
+		{
+
+			if (!(CherryEngine::get_manager()->has_component<ShapeComponent>(entity)))
+			{
+
+				if (this->construct_shape(entity))
+				{
+
+					CherryEngine::get_manager()->add_component<CollisionComponent>(entity, CollisionComponent{ &CherryEngine::get_manager()->get_component<ShapeComponent>(entity) });
+					ImGui::CloseCurrentPopup();
+
+				}
+			}
+			else
+			{
+
+				if (ImGui::Button("create"))
+				{
+					CherryEngine::get_manager()->add_component<CollisionComponent>(entity, CollisionComponent{ &CherryEngine::get_manager()->get_component<ShapeComponent>(entity) });
+					ImGui::CloseCurrentPopup();
+				}
+			}
+			if (ImGui::Button("cancel", ImVec2(120, 0))) { ImGui::CloseCurrentPopup(); }
+			ImGui::EndPopup();
+		}
+
+		
+
+	}
+}
+
+void ImGuiLayer::create_display_component(Entity entity)
+{
+	if (!(CherryEngine::get_manager()->has_component<DisplayComponent>(entity)))
+	{
+
+		if (ImGui::Button("DisplayComponent"))
+		{
+			ImGui::OpenPopup("add DisplayComponent");
+
+		}
+
+		if (ImGui::BeginPopupModal("add DisplayComponent", NULL, ImGuiWindowFlags_AlwaysAutoResize))
+		{
+
+			if (!(CherryEngine::get_manager()->has_component<ShapeComponent>(entity)))
+			{
+				if (this->construct_shape(entity))
+				{
+					CherryEngine::get_manager()->add_component<DisplayComponent>(entity, DisplayComponent{ &CherryEngine::get_manager()->get_component<ShapeComponent>(entity) });
+					ImGui::CloseCurrentPopup();
+
+				}
+			}
+			else
+			{
+
+				if (ImGui::Button("create"))
+				{
+					CherryEngine::get_manager()->add_component<DisplayComponent>(entity, DisplayComponent{ &CherryEngine::get_manager()->get_component<ShapeComponent>(entity) });
+					ImGui::CloseCurrentPopup();
+				}
+			}
+			if (ImGui::Button("cancel", ImVec2(120, 0))) { ImGui::CloseCurrentPopup(); }
+			ImGui::EndPopup();
+		}
+	}
+}
+
+void ImGuiLayer::create_shape_component(Entity entity)
+{
+	if (!(CherryEngine::get_manager()->has_component<ShapeComponent>(entity)))
+	{
+
+		if (ImGui::Button("ShapeComponent"))
+		{
+			ImGui::OpenPopup("add ShapeComponent");
+
+		}
+
+		if (ImGui::BeginPopupModal("add ShapeComponent", NULL, ImGuiWindowFlags_AlwaysAutoResize))
+		{
+
+
+			this->construct_shape(entity);
+			if (ImGui::Button("cancel", ImVec2(120, 0))) { ImGui::CloseCurrentPopup(); }
+			ImGui::EndPopup();
+		}
+
+	}
 }

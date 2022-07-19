@@ -11,8 +11,10 @@ public:
 	{
 		for (const auto& entity : entities)
 		{
-			auto& shape_component = CherryEngine::get_manager()->get_component<ShapeComponent>(entity);
 			auto& display_component = CherryEngine::get_manager()->get_component<DisplayComponent>(entity);
+			if (!display_component.visible) continue;
+			auto& shape_component = CherryEngine::get_manager()->get_component<ShapeComponent>(entity);
+			
 			std::vector<vec2f> points;
 			shape_component.shape.get_global_points(points);
 			renderer->draw_quad(points, display_component.color);
@@ -270,7 +272,9 @@ public:
 	
 		
 
-		
+		auto def_system = CherryEngine::get_manager()->register_system<System>();
+		Signature signature_default;
+		CherryEngine::get_manager()->set_system_signature<System>(signature_default);
 
 		CherryEngine::get_manager()->register_component<ShapeComponent>();
 		CherryEngine::get_manager()->register_component<DisplayComponent>();
@@ -283,7 +287,7 @@ public:
 		signature.set(CherryEngine::get_manager()->get_component_type<CollisionComponent>());
 
 		CherryEngine::get_manager()->set_system_signature<CollisionSystem>(signature);
-
+		
 
 		auto draw_system = CherryEngine::get_manager()->register_system<DrawSystem>();
 		Signature signature1;
@@ -306,8 +310,7 @@ public:
 		CherryEngine::get_manager()->add_component(triangle, DisplayComponent{ &CherryEngine::get_manager()->get_component<ShapeComponent>(triangle), {1.f, 1.f, 1.f, 1.f}, true });
 
 		CherryEngine::get_manager()->get_component<CollisionComponent>(triangle).flip_all_bits();
-	//	CherryEngine::get_manager()->get_component<CollisionComponent>(triangle).flip_collision_mask_bit(0);
-
+	//	CherryEngine::get_manager()->get_component<Col 
 		
 		
 

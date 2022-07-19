@@ -21,7 +21,15 @@ private:
 
 	void entity_tree();
 
-	bool construct_shape(Entity* e);
+	bool construct_shape(Entity entity);
 	bool delete_item_on_right_click();
+
+	void shape_component_button(Entity entity);
+	void display_component_button(Entity entity);
+	void collision_component_button(Entity entity);
+
+	void create_collision_component(Entity entity);
+	void create_display_component(Entity entity);
+	void create_shape_component(Entity entity);
 };
 

@@ -309,7 +309,12 @@ public:
 
 	Entity create_entity()
 	{
-		return entity_manager->create_entity();
+		Entity entity = entity_manager->create_entity();
+		auto signature = entity_manager->get_signature(entity);
+	
+		entity_manager->set_signature(entity, signature);
+		system_manager->entity_signature_changed(entity, signature);
+		return entity;
 	}
 
 	void destroy_entity(Entity entity)
