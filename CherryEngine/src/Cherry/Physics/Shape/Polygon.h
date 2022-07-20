@@ -75,7 +75,7 @@ public:
 
 	vec2f get_position();
 
-	void get_global_points(std::vector<vec2f>& global_points);
+	std::vector<vec2f>& get_global_points();
 	void update_transformation_matrix();
 protected:
 
@@ -87,11 +87,14 @@ protected:
 	mat4f transformation_matrix = mat4f::identity();
 	
 	std::vector<vec2f> local_points;
+	std::vector<vec2f> global_points;
 
 	vec2f translation = {0.f, 0.f};
 	float rotation = 0.f;
 	float _scale = 1.f;
 
+	bool has_updated = true;
 	vec2f origin_offset = { 0.f, 0.f };
+
 
 };

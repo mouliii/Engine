@@ -30,6 +30,7 @@
     <ClCompile Include="src\Cherry\Logic\Components.cpp" />
     <ClCompile Include="src\Cherry\Logic\CrEngine.cpp" />
     <ClCompile Include="src\Cherry\Logic\SandBoxBase.cpp" />
+    <ClCompile Include="src\Cherry\OpenGL\Rendering\Buffers\QuadBuffer.cpp" />
     <ClCompile Include="src\Cherry\Physics\Shape\Polygon.cpp" />
     <ClCompile Include="src\Cherry\Physics\Shape\Rectangle.cpp" />
     <ClCompile Include="src\Manimain.cpp" />
@@ -65,6 +66,7 @@
     <ClInclude Include="src\Cherry\Maths\BitSetLogic.h" />
     <ClInclude Include="src\Cherry\OpenGL\Devices.h" />
     <ClInclude Include="src\Cherry\OpenGL\Event.h" />
+    <ClInclude Include="src\Cherry\OpenGL\Rendering\Buffers\QuadBuffer.h" />
     <ClInclude Include="src\Cherry\OpenGL\Rendering\OrthoCamera.h" />
     <ClInclude Include="src\Cherry\Maths\Matrices.h" />
     <ClInclude Include="src\Cherry\OpenGL\Rendering\Buffers\BufferLayout.h" />

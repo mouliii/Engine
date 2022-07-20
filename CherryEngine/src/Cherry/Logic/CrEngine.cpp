@@ -35,7 +35,7 @@ int CherryEngine::i_run()
 		
 
 		window->poll_events();
-		
+		/*
 		auto& io = ImGui::GetIO();
 		if (!(io.WantCaptureMouse || io.WantCaptureKeyboard))
 		{
@@ -46,7 +46,7 @@ int CherryEngine::i_run()
 					it.second->on_game_event(events);
 			}	
 		}
-
+		*/
 		dt = window->get_timestep();
 		for (auto& it : layers)
 		{

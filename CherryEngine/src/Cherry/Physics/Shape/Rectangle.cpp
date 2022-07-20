@@ -22,8 +22,8 @@ Rectangle::Rectangle(vec2f position, vec2f size)
 
 vec2f Rectangle::get_size()
 {
-	std::vector<vec2f> global_points;
-	get_global_points(global_points);
+	
+	std::vector<vec2f>& global_points = get_global_points();
 
 	vec2f dimensions;
 

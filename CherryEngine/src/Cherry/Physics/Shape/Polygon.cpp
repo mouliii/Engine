@@ -85,16 +85,18 @@ void Polygon::update_transformation_matrix()
 	transformation_matrix = mat4f::identity();
 	
 	transformation_matrix *= mat4f::translate(translation) * mat4f::rotate_z(rotation) * mat4f::scale(_scale);
+
+	global_points.clear();
+	for (size_t i = 0; i < local_points.size(); i++)
+	{
+		global_points.push_back(transformation_matrix * local_points[i]);
+
+	}
 	//transformation_matrix *= mat4f::translate(-origin_offset);
 
 }
 
-void Polygon::get_global_points(std::vector<vec2f>& global_points)
+std::vector<vec2f>& Polygon::get_global_points()
 {
-	for (size_t i = 0; i < local_points.size(); i++)
-	{
-		global_points.push_back(transformation_matrix * local_points[i]);
-	
-	}
-
+	return global_points;
 }

@@ -46,9 +46,9 @@ public:
 		tri.push_back({ 90.f, 10.f });
 		tri.push_back({ 70.f, -40.f });
 
-		tri.push_back({ 40.f, -50.f });
+		//tri.push_back({ 40.f, -50.f });
 
-
+		/*
 		Entity triangle = CherryEngine::get_manager()->create_entity("triangle");
 		CherryEngine::get_manager()->add_component(triangle, ShapeComponent{ Polygon(tri) });
 		CherryEngine::get_manager()->add_component(triangle, CollisionComponent{ &CherryEngine::get_manager()->get_component<ShapeComponent>(triangle) });
@@ -56,7 +56,7 @@ public:
 
 		CherryEngine::get_manager()->get_component<CollisionComponent>(triangle).flip_all_bits();
 	//	CherryEngine::get_manager()->get_component<Col 
-		
+		*/
 		
 
 		player_object = CherryEngine::get_manager()->create_entity("player");
@@ -67,8 +67,20 @@ public:
 		CherryEngine::get_manager()->get_component<CollisionComponent>(player_object).flip_all_bits();
 		//player_object->get_component<CollisionComponent>().flip_collision_mask_bit(0);
 		//player_object->get_component<CollisionComponent>().flip_collision_mask_bit(1);
+		
+		for (float i = 0.f; i < 800.f; i+=10.f)
+		{
+			for (float j = 0.f; j < 600.f; j+=10.f)
+			{
+				
+				Entity asf = CherryEngine::get_manager()->create_entity();
+				CherryEngine::get_manager()->add_component(asf, ShapeComponent{ Rectangle({ i, j }, { 1.f, 1.f }) });
+				CherryEngine::get_manager()->add_component(asf, DisplayComponent{ &CherryEngine::get_manager()->get_component<ShapeComponent>(asf), {1.f, 1.f, 1.f, 1.f}, true });
 
 
+
+			}
+		}
 
 		//obstacle = &get_manager().add_entity("obs_1");
 		//obstacle->add_component<ShapeComponent>(Rectangle{ {100.f, 200.f}, {200.f, 100.f} });
@@ -159,8 +171,8 @@ public:
 			system->move_and_collide(player_object, mat4f::rotate_z(ortho_cam->get_rotation()) * vec2f(0.f, 0.f));
 		}
 			//const_cast<OrthoCamera*>(ortho_cam)->set_scale(ortho_cam->get_scale() - delta_time);
-		std::vector<vec2f> points;
-		shape.shape.get_global_points(points);
+	
+		std::vector<vec2f>& points = shape.shape.get_global_points();
 		const_cast<OrthoCamera*>(ortho_cam)->set_position(system->find_center(points)-window->get_sizef() * 0.5f);
 
 		

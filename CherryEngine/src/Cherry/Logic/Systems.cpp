@@ -8,9 +8,9 @@ void DrawSystem::on_draw_call(Window* render_window, Renderer* renderer)
 		if (!display_component.visible) continue;
 		auto& shape_component = CherryEngine::get_manager()->get_component<ShapeComponent>(entity);
 
-		std::vector<vec2f> points;
-		shape_component.shape.get_global_points(points);
-		renderer->draw_quad(points, display_component.color);
+		
+		std::vector<vec2f>& points = shape_component.shape.get_global_points();
+		renderer->draw_quad_instanced(points, display_component.color);
 	}
 
 }
@@ -110,11 +110,10 @@ bool CollisionSystem::polygon_intersect(CollisionComponent* a, CollisionComponen
 	normal = { 0.f, 0.f };
 	depth = INFINITY;
 	int8_t negative = 1;
-	std::vector<vec2f> p1;
-	std::vector<vec2f> p2;
+	
 
-	a->s_component->shape.get_global_points(p1);
-	b->s_component->shape.get_global_points(p2);
+	std::vector<vec2f>& p1 = a->s_component->shape.get_global_points();
+	std::vector<vec2f>& p2 = b->s_component->shape.get_global_points();
 
 	for (size_t i = 0; i < p1.size(); i++)
 	{
@@ -193,8 +192,8 @@ bool CollisionSystem::polygon_intersect(CollisionComponent* a, CollisionComponen
 
 void CollisionSystem::find_bounding_box(CollisionComponent* collision_component, Rectangle& bbox)
 {
-	std::vector<vec2f> points;
-	collision_component->s_component->shape.get_global_points(points);
+	
+	std::vector<vec2f>& points = collision_component->s_component->shape.get_global_points();
 
 	float left = INFINITY;
 	float right = -INFINITY;
