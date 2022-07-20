@@ -54,10 +54,6 @@ bool CollisionSystem::move_and_collide(Entity entity, vec2f translation)
 
 		if (entity == entity2) continue;
 
-
-		//if (!entity2->has_component<CollisionComponent>())
-		//	continue;
-
 		CollisionComponent* cc2 = &CherryEngine::get_manager()->get_component<CollisionComponent>(entity2);
 
 
@@ -83,7 +79,6 @@ bool CollisionSystem::move_and_collide(Entity entity, vec2f translation)
 			cc2->collision_informations.push_back(new CollisionInformation{ normal * depth * 0.5f });
 			cc2->has_collided = true;
 		
-			std::cout << CherryEngine::get_manager()->get_entity_name(entity) << " " << CherryEngine::get_manager()->get_entity_name(entity2) << " collided!\n";
 			
 
 
@@ -128,7 +123,7 @@ bool CollisionSystem::polygon_intersect(CollisionComponent* a, CollisionComponen
 		vec2f vb = p1[(i + 1) % p1.size()];
 
 		vec2f edge = vb - va;
-		vec2f axis = { -edge.y, edge.x };
+		vec2f axis = { edge.y, -edge.x };
 
 		float min_a, max_a, min_b, max_b;
 
@@ -160,7 +155,7 @@ bool CollisionSystem::polygon_intersect(CollisionComponent* a, CollisionComponen
 		vec2f vb = p2[(i + 1) % p2.size()];
 
 		vec2f edge = vb - va;
-		vec2f axis = { -edge.y, edge.x };
+		vec2f axis = { edge.y, -edge.x };
 
 		float min_a, max_a, min_b, max_b;
 
