@@ -50,8 +50,76 @@ Renderer::Renderer()
 	}
 
 	begin_batch();
+	vao.unbind();
+	vbo.unbind();
+	ibo.unbind();
+
+	//////////////////////////////////////////////
+
+	const int maxQuads = 100;
+	int indexBufferData[maxQuads * 6];
+	int instancedOffset = 0;
+	for (size_t i = 0; i < maxQuads; i += 6)
+	{
+
+		indexBufferData[i + 0] = instancedOffset + 0;
+		indexBufferData[i + 1] = instancedOffset + 1;
+		indexBufferData[i + 2] = instancedOffset + 2;
+								 
+		indexBufferData[i + 3] = instancedOffset + 0;
+		indexBufferData[i + 4] = instancedOffset + 2;
+		indexBufferData[i + 5] = instancedOffset + 3;
+		instancedOffset += 4;
+	}
+
+	instancedStride = sizeof(float) * 6;
 
 
+	glGenVertexArrays(1, &vaoInstanced);
+	glGenBuffers(1, &vboInstanced);
+	glGenBuffers(1, &iboInstanced);
+
+	glBindVertexArray(vaoInstanced);
+	glBindBuffer(GL_ARRAY_BUFFER, vboInstanced);
+	glBufferData(GL_ARRAY_BUFFER, instancedStride * 4 * maxQuads, nullptr, GL_DYNAMIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboInstanced);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexBufferData), indexBufferData, GL_DYNAMIC_DRAW);
+		
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, instancedStride,  0);
+	glEnableVertexAttribArray(0);
+	
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, instancedStride, (const void*)(2 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+/*
+	float vertices[] = {
+		// pos				// color
+	-50.0f, -50.0f,       1.0f, 1.0f, 1.0f, 1.0f,
+	 50.0f, -50.0f,       1.0f, 1.0f, 1.0f, 1.0f,
+	 50.0f,  50.0f,       1.0f, 1.0f, 1.0f, 1.0f,
+	-50.0f,  50.0f,       1.0f, 1.0f, 1.0f, 1.0f
+	};
+	int indices[] = { 0, 1, 2, 0, 2, 3};
+
+	glGenVertexArrays(1, &vaoInstanced);
+	glGenBuffers(1, &vboInstanced);
+	glGenBuffers(1, &iboInstanced);
+
+	glBindVertexArray(vaoInstanced);
+	glBindBuffer(GL_ARRAY_BUFFER, vboInstanced);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboInstanced);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_DYNAMIC_DRAW);
+
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 6 * sizeof(float), 0);
+	glEnableVertexAttribArray(0);
+
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (const void*)(2 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+*/
 }
 
 Renderer::~Renderer()
@@ -96,9 +164,9 @@ void Renderer::end_batch()
 
 void Renderer::display()
 {
-
 	clear();
 	end_batch();
+	FlushNewQuads();
 	begin_batch();
 }
 
@@ -195,4 +263,46 @@ void Renderer::update_camera()
 OrthoCamera* Renderer::get_camera() const
 {
 	return ortho_cam;
+}
+
+void Renderer::DrwaQuad(std::vector<vec2f>& points, vec4f& color)
+{
+	std::vector<float> data;
+	data.push_back(points[0].x);
+	data.push_back(points[0].y);
+	data.push_back(color.x);
+	data.push_back(color.y);
+	data.push_back(color.z);
+	data.push_back(color.w);
+	data.push_back(points[3].x);
+	data.push_back(points[3].y);
+	data.push_back(color.x);
+	data.push_back(color.y);
+	data.push_back(color.z);
+	data.push_back(color.w);
+	data.push_back(points[2].x);
+	data.push_back(points[2].y);
+	data.push_back(color.x);
+	data.push_back(color.y);
+	data.push_back(color.z);
+	data.push_back(color.w);
+	data.push_back(points[1].x);
+	data.push_back(points[1].y);
+	data.push_back(color.x);
+	data.push_back(color.y);
+	data.push_back(color.z);
+	data.push_back(color.w);// neliö   elementit     floatteja
+	const float vertexDataSize = 4.0f * 6.0f * sizeof(float);
+	glBindBuffer(GL_ARRAY_BUFFER, vboInstanced);
+	glBufferSubData(GL_ARRAY_BUFFER,instanceCount * vertexDataSize, vertexDataSize, &data[0]);
+	instanceCount++;
+}
+
+void Renderer::FlushNewQuads()
+{
+	shader.bind();
+	update_camera();
+	glBindVertexArray(vaoInstanced);
+	glDrawElements(GL_TRIANGLES, sizeof(float)* 6* instanceCount, GL_UNSIGNED_INT, 0); // offset 0
+	instanceCount = 0u;
 }
