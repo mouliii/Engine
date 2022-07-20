@@ -302,6 +302,7 @@ void DisplayComponent::on_draw_call(Window* window, Renderer* renderer)
 		std::vector<vec2f> points;
 		s_component->get_shape()->get_global_points(points);
 
-		renderer->draw_quad(points, color);
+		//renderer->draw_quad(points, color);
+		renderer->DrwaQuad(points, color);
 	}
 }

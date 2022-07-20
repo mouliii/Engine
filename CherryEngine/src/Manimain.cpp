@@ -16,22 +16,22 @@ public:
 	
 		
 
-		std::vector<vec2f> tri;
-		tri.push_back({ 10.f, 10.f });
-		tri.push_back({ 80.f, 80.f });
-		tri.push_back({ 90.f, 10.f });
-		tri.push_back({ 70.f, -40.f });
+		//std::vector<vec2f> tri;
+		//tri.push_back({ 10.f, 10.f });
+		//tri.push_back({ 80.f, 80.f });
+		//tri.push_back({ 90.f, 10.f });
+		//tri.push_back({ 70.f, -40.f });
 
-		tri.push_back({ 40.f, -50.f });
+		//tri.push_back({ 40.f, -50.f });
 
 
-		Entity* triangle = &manager.add_entity("triangle");
-		triangle->add_component<ShapeComponent>(Polygon(tri));
-		triangle->add_component<DisplayComponent>(&triangle->get_component<ShapeComponent>());
-		triangle->add_component<CollisionComponent>(&triangle->get_component<ShapeComponent>());
+		//Entity* triangle = &manager.add_entity("triangle");
+		//triangle->add_component<ShapeComponent>(Polygon(tri));
+		//triangle->add_component<DisplayComponent>(&triangle->get_component<ShapeComponent>());
+		//triangle->add_component<CollisionComponent>(&triangle->get_component<ShapeComponent>());
 
-		triangle->get_component<CollisionComponent>().flip_all_bits();
-		triangle->get_component<CollisionComponent>().flip_collision_mask_bit(0);
+		//triangle->get_component<CollisionComponent>().flip_all_bits();
+		//triangle->get_component<CollisionComponent>().flip_collision_mask_bit(0);
 
 
 		

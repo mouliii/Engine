@@ -16,7 +16,6 @@ struct QuadVertex
 {
 	vec2f pos;
 	vec4f color;
-
 };
 
 struct RenderData
@@ -58,10 +57,14 @@ public:
 
 	OrthoCamera* get_camera() const;
 
+	void DrwaQuad(std::vector<vec2f>& points, vec4f& color);
+
 private:
 	void begin_batch();
 	void flush();
 	void end_batch();
+
+	void FlushNewQuads();
 
 private:
 	VertexArray vao;
@@ -76,5 +79,10 @@ private:
 	
 	OrthoCamera* ortho_cam;
 
+	uint32_t vaoInstanced;
+	uint32_t vboInstanced;
+	uint32_t iboInstanced;
+	uint32_t instanceCount = 0u;
+	uint32_t instancedStride = 0u;
 };
 
