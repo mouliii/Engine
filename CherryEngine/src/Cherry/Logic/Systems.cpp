@@ -82,6 +82,10 @@ bool CollisionSystem::move_and_collide(Entity entity, vec2f translation)
 
 			cc2->collision_informations.push_back(new CollisionInformation{ normal * depth * 0.5f });
 			cc2->has_collided = true;
+		
+			std::cout << CherryEngine::get_manager()->get_entity_name(entity) << " " << CherryEngine::get_manager()->get_entity_name(entity2) << " collided!\n";
+			
+
 
 		}
 	}
