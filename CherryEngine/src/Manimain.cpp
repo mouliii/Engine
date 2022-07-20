@@ -49,7 +49,7 @@ public:
 		tri.push_back({ 40.f, -50.f });
 
 
-		Entity triangle = CherryEngine::get_manager()->create_entity();
+		Entity triangle = CherryEngine::get_manager()->create_entity("triangle");
 		CherryEngine::get_manager()->add_component(triangle, ShapeComponent{ Polygon(tri) });
 		CherryEngine::get_manager()->add_component(triangle, CollisionComponent{ &CherryEngine::get_manager()->get_component<ShapeComponent>(triangle) });
 		CherryEngine::get_manager()->add_component(triangle, DisplayComponent{ &CherryEngine::get_manager()->get_component<ShapeComponent>(triangle), {1.f, 1.f, 1.f, 1.f}, true });
@@ -59,7 +59,7 @@ public:
 		
 		
 
-		player_object = CherryEngine::get_manager()->create_entity();
+		player_object = CherryEngine::get_manager()->create_entity("player");
 		CherryEngine::get_manager()->add_component(player_object, ShapeComponent{ Rectangle({ -25.f, -25.f }, { 50.f, 50.f }) });
 		CherryEngine::get_manager()->add_component(player_object, CollisionComponent{ &CherryEngine::get_manager()->get_component<ShapeComponent>(player_object) });
 		CherryEngine::get_manager()->add_component(player_object, DisplayComponent{ &CherryEngine::get_manager()->get_component<ShapeComponent>(player_object), {1.f, 1.f, 1.f, 1.f}, true });

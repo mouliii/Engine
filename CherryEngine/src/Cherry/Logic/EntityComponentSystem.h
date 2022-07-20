@@ -31,10 +31,11 @@ public:
 		}
 	}
 
-	Entity create_entity()
+	Entity create_entity(std::string name="entity")
 	{
 
 		Entity id = available_entries.front();
+		entity_name_map[id] = name;
 		available_entries.pop();
 
 		entity_count++;
@@ -46,7 +47,7 @@ public:
 	void destroy_entity(Entity entity)
 	{
 		signatures[entity].reset();
-
+		entity_name_map.erase(entity);
 		available_entries.push(entity);
 		entity_count--;
 	}
@@ -61,11 +62,19 @@ public:
 		return signatures[entity];
 	}
 
+	const std::string& get_entity_name(Entity entity)
+	{
+		return entity_name_map[entity];
+	}
+
 
 private:
 
 	std::queue<Entity> available_entries;
 	std::array<Signature, MAX_ENTITIES> signatures;
+
+	std::unordered_map<Entity, std::string> entity_name_map;
+
 	uint32_t entity_count = 0;
 
 	
@@ -307,9 +316,9 @@ public:
 
 	// entity
 
-	Entity create_entity()
+	Entity create_entity(std::string name="entity")
 	{
-		Entity entity = entity_manager->create_entity();
+		Entity entity = entity_manager->create_entity(name);
 		auto signature = entity_manager->get_signature(entity);
 	
 		entity_manager->set_signature(entity, signature);
@@ -322,6 +331,11 @@ public:
 		entity_manager->destroy_entity(entity);
 		component_manager->entity_destroyed(entity);
 		system_manager->entity_destroyed(entity);
+	}
+
+	const std::string& get_entity_name(Entity entity)
+	{
+		return entity_manager->get_entity_name(entity);
 	}
 
 	// component

@@ -91,7 +91,7 @@ void ImGuiLayer::entity_tree()
 
 		if (ImGui::Button("add", { 30, 30 }))
 		{
-			CherryEngine::get_manager()->create_entity();
+			CherryEngine::get_manager()->create_entity(name);
 		}
 
 
@@ -110,7 +110,7 @@ void ImGuiLayer::entity_tree()
 
 		ImGui::PushID(entity);
 
-		bool entity_list = ImGui::CollapsingHeader(std::to_string(entity).c_str());
+		bool entity_list = ImGui::CollapsingHeader(CherryEngine::get_manager()->get_entity_name(entity).c_str());
 
 		if (delete_item_on_right_click())
 		{
