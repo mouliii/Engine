@@ -2,7 +2,7 @@
 
 Polygon::Polygon()
 {
-	local_points = { {-1.f, 0.f}, {0.f, 1.f}, {1.f, 0.f}, {0.f, -1.f} };
+	local_points = { {-1.f, 0.f}, {0.f, -1.f}, {0.f, 1.f}, {1.f, 0.f} };
 	update_transformation_matrix();
 }
 

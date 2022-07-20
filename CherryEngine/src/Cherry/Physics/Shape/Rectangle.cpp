@@ -2,7 +2,7 @@
 
 Rectangle::Rectangle()
 {
-	local_points = { {-1.f, -1.f}, {-1.f, 1.f}, {1.f, 1.f}, {1.f, -1.f} };
+	local_points = { {-1.f, -1.f}, {1.f, -1.f}, {1.f, 1.f}, {-1.f, 1.f} };
 	update_transformation_matrix();
 }
 
@@ -10,9 +10,9 @@ Rectangle::Rectangle(vec2f position, vec2f size)
 {
 	local_points.clear();
 	local_points.emplace_back(position);
-	local_points.emplace_back(position.x, position.y + size.y);
-	local_points.emplace_back(position.x + size.x, position.y + size.y);
 	local_points.emplace_back(position.x + size.x, position.y);
+	local_points.emplace_back(position.x + size.x, position.y + size.y);
+	local_points.emplace_back(position.x, position.y + size.y);
 
 	origin_offset = size * 0.5f;
 	

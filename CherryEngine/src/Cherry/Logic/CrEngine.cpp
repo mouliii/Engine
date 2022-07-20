@@ -15,12 +15,6 @@ int CherryEngine::i_init()
 	renderer->set_camera(orthocamera);
 	initialized = true;
 
-
-
-	/* IMGUI INITIALIZATION */
-
-	
-
 	return 0;
 }
 
@@ -38,19 +32,20 @@ int CherryEngine::i_run()
 	while (!window->window_should_close())
 	{
 
-		//EventVector events = window->get_events();
+		
 
 		window->poll_events();
-	   
-	
-	   
-		/*
-		if (events.size())
+		
+		auto& io = ImGui::GetIO();
+		if (!(io.WantCaptureMouse || io.WantCaptureKeyboard))
 		{
-			for (auto& it : layers)
-				it.second->on_game_event(events);
+			EventVector events = window->get_events();
+			if (events.size())
+			{
+				for (auto& it : layers)
+					it.second->on_game_event(events);
+			}	
 		}
-		*/
 
 		dt = window->get_timestep();
 		for (auto& it : layers)

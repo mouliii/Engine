@@ -91,7 +91,7 @@ void ImGuiLayer::entity_tree()
 
 		if (ImGui::Button("add", { 30, 30 }))
 		{
-			CherryEngine::get_manager()->create_entity();
+			CherryEngine::get_manager()->create_entity(name);
 		}
 
 
@@ -110,7 +110,7 @@ void ImGuiLayer::entity_tree()
 
 		ImGui::PushID(entity);
 
-		bool entity_list = ImGui::CollapsingHeader(std::to_string(entity).c_str());
+		bool entity_list = ImGui::CollapsingHeader(CherryEngine::get_manager()->get_entity_name(entity).c_str());
 
 		if (delete_item_on_right_click())
 		{
@@ -236,13 +236,14 @@ void ImGuiLayer::shape_component_button(Entity entity)
 	{
 		ShapeComponent& sc = CherryEngine::get_manager()->get_component<ShapeComponent>(entity);
 
-		const char* component_name = CherryEngine::get_manager()->get_component_name<ShapeComponent>();
+		std::string component_name = CherryEngine::get_manager()->get_component_name<ShapeComponent>();
+		// remove "struct" from name
+		component_name = component_name.substr(7);
 
 
-
-		bool component_list = ImGui::CollapsingHeader(component_name);
-		// DELETION OF COMPONENTS TODODO
-		ImGui::PushID(component_name);
+		bool component_list = ImGui::CollapsingHeader(component_name.c_str());
+		
+		ImGui::PushID(component_name.c_str());
 		if (delete_item_on_right_click())
 		{
 			CherryEngine::get_manager()->remove_component<ShapeComponent>(entity);
@@ -297,13 +298,14 @@ void ImGuiLayer::display_component_button(Entity entity)
 	{
 		DisplayComponent& dc = CherryEngine::get_manager()->get_component<DisplayComponent>(entity);
 
-		const char* component_name = CherryEngine::get_manager()->get_component_name<DisplayComponent>();
+		std::string component_name = CherryEngine::get_manager()->get_component_name<DisplayComponent>();
+		// remove "struct" from name
+		component_name = component_name.substr(7);
 
-
-		bool component_list = ImGui::CollapsingHeader(component_name);
-		// DELETION OF COMPONENTS TODODO
+		bool component_list = ImGui::CollapsingHeader(component_name.c_str());
+	
 		
-		ImGui::PushID(component_name);
+		ImGui::PushID(component_name.c_str());
 		if (delete_item_on_right_click())
 		{
 			CherryEngine::get_manager()->remove_component<DisplayComponent>(entity);
@@ -317,8 +319,8 @@ void ImGuiLayer::display_component_button(Entity entity)
 
 			float col[4] = { dc.color.x, dc.color.y, dc.color.z, dc.color.w };
 
-			ImGui::ColorPicker4("color", col);
-			//ImGui::SliderFloat3()
+			ImGui::ColorEdit4("color", col);
+		
 			dc.color = { col[0], col[1], col[2], col[3] };
 
 			ImGui::Checkbox("visible", &dc.visible);
@@ -334,13 +336,14 @@ void ImGuiLayer::collision_component_button(Entity entity)
 	{
 		CollisionComponent& cc = CherryEngine::get_manager()->get_component<CollisionComponent>(entity);
 
-		const char* component_name = CherryEngine::get_manager()->get_component_name<CollisionComponent>();
+		std::string component_name = CherryEngine::get_manager()->get_component_name<CollisionComponent>();
+		// remove "struct" from name
+		component_name = component_name.substr(7);
 
 
-		bool component_list = ImGui::CollapsingHeader(component_name);
-		// DELETION OF COMPONENTS TODODO
-		
-		ImGui::PushID(component_name);
+		bool component_list = ImGui::CollapsingHeader(component_name.c_str());
+
+		ImGui::PushID(component_name.c_str());
 		if (delete_item_on_right_click())
 		{
 			CherryEngine::get_manager()->remove_component<CollisionComponent>(entity);
