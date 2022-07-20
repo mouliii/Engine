@@ -10,7 +10,7 @@ void DrawSystem::on_draw_call(Window* render_window, Renderer* renderer)
 
 		std::vector<vec2f> points;
 		shape_component.shape.get_global_points(points);
-		renderer->draw_quad(points, display_component.color);
+		renderer->DrwaQuad(points, display_component.color);
 	}
 
 }

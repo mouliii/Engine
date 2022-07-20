@@ -46,7 +46,7 @@ public:
 		tri.push_back({ 90.f, 10.f });
 		tri.push_back({ 70.f, -40.f });
 
-		tri.push_back({ 40.f, -50.f });
+		//tri.push_back({ 40.f, -50.f });
 
 
 		Entity triangle = CherryEngine::get_manager()->create_entity();
