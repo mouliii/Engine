@@ -1,5 +1,5 @@
+#pragma once
 #include "CrEngine.h"
-
 class DrawSystem : public System
 {
 public:

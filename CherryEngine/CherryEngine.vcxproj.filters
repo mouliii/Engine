@@ -51,7 +51,7 @@
     <ClCompile Include="src\Cherry\OpenGL\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Manimain.cpp">
+    <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Cherry\Logic\Components.cpp">
@@ -195,6 +195,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Cherry\Logic\Systems.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
