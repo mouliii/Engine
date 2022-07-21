@@ -195,9 +195,25 @@ public:
 			{
 
 				//std::cout << e.scroll_ev.y_offset << std::endl;
-
+				break;
 			}
-				
+
+			case EventType::WINDOW_RESIZE:
+			{
+
+				////window->set_size(e.window_res_ev.w, e.window_res_ev.h);
+				//std::cout << e.window_res_ev.w << " " << e.window_res_ev.h << std::endl;
+				//ortho_cam->resize(0, e.window_res_ev.w, 0, e.window_res_ev.h);
+				break;
+			}
+			
+			case EventType::FRAMEBUFFER_RESIZE:
+			{
+				//std::cout << e.frame_buf_res_ev.w << " " << e.frame_buf_res_ev.h << std::endl;
+				ortho_cam->resize(0, e.frame_buf_res_ev.w, 0, e.frame_buf_res_ev.h);
+				break;
+			}
+
 			case EventType::KEYBOARD:
 			{
 				

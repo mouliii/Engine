@@ -61,6 +61,14 @@ void Window::set_title(const std::string& title)
 	glfwSetWindowTitle(this->gl_window, title.c_str());
 }
 
+void Window::set_size(uint32_t width, uint32_t height)
+{
+	this->width = width;
+	this->height = height;
+
+	//glfwSetWindowSize(this->gl_window, this->width, this->height);
+}
+
 GLFWwindow* Window::_get_glfw_window()
 {
 	return gl_window;
@@ -105,7 +113,8 @@ void Window::init()
 	glfwSetCursorPosCallback(this->gl_window, cursor_callback);
 	glfwSetMouseButtonCallback(this->gl_window, mouse_button_callback);
 	glfwSetScrollCallback(this->gl_window, scroll_callback);
-	
+	glfwSetWindowSizeCallback(this->gl_window, window_size_callback);
+	glfwSetFramebufferSizeCallback(this->gl_window, framebuffer_size_callback);
 }
 
 void Window::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -162,4 +171,29 @@ void Window::scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 
 	events.push_back(e);
 
+}
+
+void Window::window_size_callback(GLFWwindow* window, int width, int height)
+{
+
+	Event e;
+	e.type = EventType::WINDOW_RESIZE;
+
+	e.window_res_ev.w = width;
+	e.window_res_ev.h = height;
+
+	events.push_back(e);
+
+}
+
+void Window::framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+	Event e;
+	e.type = EventType::FRAMEBUFFER_RESIZE;
+	e.frame_buf_res_ev.w = width;
+	e.frame_buf_res_ev.h = height;
+
+	glViewport(0, 0, width, height);
+
+	events.push_back(e);
 }

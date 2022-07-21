@@ -27,6 +27,7 @@ public:
 	vec2f get_sizef() const;
 
 	void set_title(const std::string& title);
+	void set_size(uint32_t w, uint32_t h);
 
 	GLFWwindow* _get_glfw_window();
 
@@ -42,7 +43,8 @@ private:
 	static void cursor_callback(GLFWwindow* window, double xpos, double ypos);
 	static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 	static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
-
+	static void window_size_callback(GLFWwindow* window, int width, int height);
+	static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 private:
 
 	GLFWwindow* gl_window;
