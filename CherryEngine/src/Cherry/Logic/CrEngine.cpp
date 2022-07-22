@@ -6,9 +6,9 @@ int CherryEngine::i_init()
 	if (initialized) return 1;
 
 	window = new Window();
-
 	manager = new ECSManager();
-	
+	layer_manager = new LayerManager();
+
 	glfwSwapInterval(0);
 	renderer = new Renderer();
 	orthocamera = new OrthoCamera(0.f, 800.f, 0.f, 600.f);
@@ -18,10 +18,9 @@ int CherryEngine::i_init()
 	return 0;
 }
 
-int CherryEngine::i_add_layer(SandBoxBase* sandbox_layer, std::string name)
+int CherryEngine::i_add_layer(Layer* layer)
 {
-	sandbox_layer->on_init();
-	layers[name] = sandbox_layer;
+	layer_manager->push_layer(layer);
 	return 0;
 }
 
@@ -42,32 +41,37 @@ int CherryEngine::i_run()
 			EventVector events = window->get_events();
 			if (events.size())
 			{
-				for (auto& it : layers)
-					it.second->on_game_event(events);
+				for (auto* application : applications)
+				{
+					application->on_game_event(events);
+				}
+				for (auto* layer : layer_manager->layers)
+				{
+					layer->on_event(events);
+				}
 			}	
 		}
 
 		dt = window->get_timestep();
-		for (auto& it : layers)
+		for (auto* application : applications)
 		{
-			it.second->on_game_tick(dt);
+			application->on_game_tick(dt);
+		}
+		for (auto* layer : layer_manager->layers)
+		{
+			layer->on_update(dt);
 		}
 
 
-		for (auto& it : layers)
+		for (auto* application : applications)
 		{
-			it.second->on_draw_call(window, renderer);
+			application->on_draw_call(window, renderer);
 		}
-
-	
-		
-
-
 		renderer->display();
 		
-		for (auto& it : layers)
+		for (auto* application : applications)
 		{
-			it.second->on_loop_end();
+			application->on_loop_end();
 		}
 
 
@@ -80,21 +84,26 @@ int CherryEngine::i_destroy()
 	delete window;
 	delete renderer;
 	delete orthocamera;
-	for (auto& it : layers)
-	{
-		delete it.second;
-	}
+	delete layer_manager;
 
 
 	return 0;
 }
 
-SandBoxBase* CherryEngine::i_get_layer(const std::string& name)
+int CherryEngine::i_destroy_layer(Layer* layer)
 {
-	if (layers.find(name) == layers.end())
-		return nullptr;
-	return layers[name];
+
+	layer_manager->pop_layer(layer);
+	return 0;
 }
+
+int CherryEngine::i_add_application(SandBoxBase* application)
+{
+	application->on_init();
+	applications.push_back(application);
+	return 0;
+}
+
 
 Window* CherryEngine::i_get_render_window() const
 {

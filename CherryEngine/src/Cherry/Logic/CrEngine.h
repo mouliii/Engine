@@ -3,6 +3,7 @@
 #include <memory>
 
 #include "SandBoxBase.h"
+#include "LayerManager.h"
 #include "Components.h"
 #include "EntityComponentSystem.h"
 
@@ -25,11 +26,12 @@ public:
 
 
 	static int init() { return get().i_init(); }
-	static int add_layer(SandBoxBase* sandbox_layer, const std::string& name) { return get().i_add_layer(sandbox_layer, name); }
+	static int push_layer(Layer* layer) { return get().i_add_layer(layer); }
+	static int destroy_layer(Layer* layer) { return get().i_destroy_layer(layer); }
+	static int push_application(SandBoxBase* application) { return get().i_add_application(application); }
 	static int run() { return get().i_run(); }
 	static int destroy() { return get().i_destroy(); }
 
-	static SandBoxBase* get_layer(const std::string& name) { return get().i_get_layer(name); }
 	static Window* get_render_window() { return get().i_get_render_window(); }
 	static OrthoCamera* get_ortho_camera() { return get().i_get_ortho_camera(); }
 	static ECSManager* get_manager() { return get().i_get_manager(); }
@@ -40,25 +42,31 @@ public:
 private:
 
 	int i_init();
-	int i_add_layer(SandBoxBase* sandbox_layer, std::string name);
+	int i_add_layer(Layer* layer);
 	int i_run();
 	int i_destroy();
+	int i_destroy_layer(Layer* layer);
+	int i_add_application(SandBoxBase* application);
 
-	SandBoxBase* i_get_layer(const std::string& name);
 	Window* i_get_render_window() const;
 	OrthoCamera* i_get_ortho_camera() const;
 	ECSManager* i_get_manager() const;
 
 	CherryEngine() {}
 
+
+private:
+
 	bool initialized = false;
 	float dt;
-
-	std::unordered_map<std::string, SandBoxBase*> layers;
+	
+	std::vector<SandBoxBase*> applications;
 
 	Window* window;
 
 	Renderer* renderer;
 	OrthoCamera* orthocamera;
 	ECSManager* manager;
+
+	LayerManager* layer_manager;
 }; 

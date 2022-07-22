@@ -11,10 +11,10 @@ int main()
 	
 
 	Application* application = new Application();	
-	CherryEngine::add_layer(application, "main");
+	CherryEngine::push_application(application);
 
 	ImGuiLayer* imguil = new ImGuiLayer();
-	CherryEngine::add_layer(imguil, "imguil");
+	CherryEngine::push_application(imguil);
 
 	//std::cout << CherryEngine::get_layer("main") << " " << CherryEngine::get_layer("secondary") << "\n";
 	

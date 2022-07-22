@@ -3,7 +3,7 @@
 #include "EntityComponentSystem.h"
 
 /*
-Baseclass for layouts for the engine to call.
+Baseclass for applications for the engine to call.
 */
 
 

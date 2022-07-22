@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Cherry\Logic\LayerManager.cpp" />
     <ClCompile Include="src\Cherry\Logic\ImGuiLayer.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_demo.cpp" />
@@ -46,7 +47,9 @@
     <ClCompile Include="src\Cherry\Logic\Systems.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Cherry\Logic\LayerManager.h" />
     <ClInclude Include="src\Application.h" />
+    <ClInclude Include="src\Cherry\Logic\Layer.h" />
     <ClInclude Include="src\Cherry\Logic\ImGuiLayer.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
