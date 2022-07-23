@@ -480,3 +480,10 @@ void ImGuiLayer::create_shape_component(Entity entity)
 
 	}
 }
+
+void ImGuiLayer::TestFBO()
+{
+	ImGui::Begin("fbo");
+
+	ImGui::End();
+}

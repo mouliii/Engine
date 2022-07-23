@@ -31,5 +31,7 @@ private:
 	void create_collision_component(Entity entity);
 	void create_display_component(Entity entity);
 	void create_shape_component(Entity entity);
+
+	void TestFBO();
 };
 

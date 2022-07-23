@@ -39,6 +39,7 @@ private:
 	void end_batch();
 
 private:
+	FrameBuffer frame_buffer;
 	Shader shader;
 
 	vec4f clear_color = { 0.2f, 0.3f, 0.3f, 1.0f };

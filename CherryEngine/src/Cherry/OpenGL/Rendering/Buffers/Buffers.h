@@ -2,6 +2,7 @@
 #include "IndexBuffer.h"
 #include "VertexBuffer.h"
 #include "VertexArray.h"
+#include "FrameBuffer.h"
 #include "../../../Maths/Vecs.h"
 
 

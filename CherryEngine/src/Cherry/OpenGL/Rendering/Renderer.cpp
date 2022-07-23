@@ -2,6 +2,7 @@
 
 Renderer::Renderer()
 	:
+	frame_buffer(800, 600),
 	quad_buffer_instanced(1000, GL_DYNAMIC_DRAW)
 {
 	shader.load_shaders("resources/shaders/vertex_shader.shader", "resources/shaders/fragment_shader.shader");
@@ -16,7 +17,7 @@ Renderer::~Renderer()
 void Renderer::clear()
 {
 	glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void Renderer::begin_batch()
