@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <functional>
 
 enum class EventType
 {
@@ -54,7 +55,26 @@ struct Event
 	ScrollEvent scroll_ev;
 	WindowResizeEvent window_res_ev;
 	FrameBufferResizeEvent frame_buf_res_ev;
+
+	bool is_handled = false;
 };
 
 
-typedef const std::vector<Event>& EventVector;
+typedef std::vector<Event>& EventVector;
+
+typedef std::function<bool(Event&)> event_func;
+
+class EventDispatcher
+{
+
+public:
+
+	static void dispatch_event(Event& e, event_func dispatched_fun)
+	{
+		if (dispatched_fun(e))
+		{
+			e.is_handled = true;
+		}
+	}
+
+};

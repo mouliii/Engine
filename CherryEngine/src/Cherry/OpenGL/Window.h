@@ -17,7 +17,7 @@ public:
 
 	void poll_events() const;
 	void wait_events() const;
-	const std::vector<Event>& get_events() const;
+	std::vector<Event>& get_events() const;
 	
 	// Get time between frames
 	TimeStep get_timestep();

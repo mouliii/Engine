@@ -5,7 +5,7 @@
 #include "../Maths/BitSetLogic.h"
 #include "../Physics/Shape/Rectangle.h"
 
-#include "CrEngine.h"
+#include "../Application.h"
 
 #define COLLISION_MASK_LAYER_COUNT 20
 
