@@ -13,7 +13,7 @@ void ImGuiLayer::on_init()
 	ImGui_ImplOpenGL3_Init((char*)glGetString(GL_NUM_SHADING_LANGUAGE_VERSIONS));
 }
 
-void ImGuiLayer::on_game_tick(TimeStep)
+void ImGuiLayer::on_update(TimeStep)
 {
 
 	ImGui_ImplOpenGL3_NewFrame();
@@ -30,24 +30,17 @@ void ImGuiLayer::on_game_tick(TimeStep)
 
 	entity_tree();
 
-	
 
-}
-	
-
-
-
-
-
-void ImGuiLayer::on_draw_call(Window*, Renderer*)
-{
 	ImGui::Render();
+
 }
 
 void ImGuiLayer::on_loop_end()
 {
 	set_render_data();
 }
+	
+
 
 void ImGuiLayer::set_render_data()
 {

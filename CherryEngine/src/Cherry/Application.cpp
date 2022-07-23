@@ -1,4 +1,4 @@
-#include "CrEngine.h"
+#include "Application.h"
 
 
 int CherryEngine::i_init()
@@ -18,8 +18,9 @@ int CherryEngine::i_init()
 	return 0;
 }
 
-int CherryEngine::i_add_layer(Layer* layer)
+int CherryEngine::i_push_layer(Layer* layer)
 {
+	layer->on_init();
 	layer_manager->push_layer(layer);
 	return 0;
 }
@@ -41,38 +42,36 @@ int CherryEngine::i_run()
 			EventVector events = window->get_events();
 			if (events.size())
 			{
-				for (auto* application : applications)
+				for (Event& e : events)
 				{
-					application->on_game_event(events);
-				}
-				for (auto* layer : layer_manager->layers)
-				{
-					layer->on_event(events);
+					
+					for (auto* layer : layer_manager->layers)
+					{
+						if (e.is_handled) break;
+						layer->on_event(e);
+					}
 				}
 			}	
 		}
 
 		dt = window->get_timestep();
-		for (auto* application : applications)
-		{
-			application->on_game_tick(dt);
-		}
+	
 		for (auto* layer : layer_manager->layers)
 		{
 			layer->on_update(dt);
 		}
 
 
-		for (auto* application : applications)
-		{
-			application->on_draw_call(window, renderer);
-		}
+	
+
 		renderer->display();
 		
-		for (auto* application : applications)
+		for (auto* layer : layer_manager->layers)
 		{
-			application->on_loop_end();
+			layer->on_loop_end();
 		}
+
+
 
 
 	}
@@ -97,17 +96,17 @@ int CherryEngine::i_destroy_layer(Layer* layer)
 	return 0;
 }
 
-int CherryEngine::i_add_application(SandBoxBase* application)
-{
-	application->on_init();
-	applications.push_back(application);
-	return 0;
-}
+
 
 
 Window* CherryEngine::i_get_render_window() const
 {
 	return window;
+}
+
+Renderer* CherryEngine::i_get_renderer() const
+{
+	return renderer;
 }
 
 OrthoCamera* CherryEngine::i_get_ortho_camera() const

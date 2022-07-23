@@ -60,7 +60,7 @@ struct Event
 };
 
 
-typedef const std::vector<Event>& EventVector;
+typedef std::vector<Event>& EventVector;
 
 
 typedef std::function<bool(Event&)> event_func;

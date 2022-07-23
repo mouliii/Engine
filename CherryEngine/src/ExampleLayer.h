@@ -3,7 +3,7 @@
 #include "Cherry/Logic/ImGuiLayer.h"
 
 
-class Application : public SandBoxBase
+class ExampleLayer : public Layer
 {
 public:
 
@@ -113,7 +113,7 @@ public:
 
 
 	}
-	virtual void on_game_tick(TimeStep delta_time) override
+	virtual void on_update(TimeStep delta_time) override
 	{
 
 
@@ -165,71 +165,59 @@ public:
 		const_cast<OrthoCamera*>(ortho_cam)->set_position(system->find_center(points) - window->get_sizef() * 0.5f);
 
 
+		CherryEngine::get_renderer()->update_camera();
 
+		DrawSystem* dsystem = static_cast<DrawSystem*>(CherryEngine::get_manager()->get_system_manager()->get_system<DrawSystem>().get());
+		dsystem->on_draw_call(CherryEngine::get_render_window(), CherryEngine::get_renderer());
+		
 	}
-	virtual void on_draw_call(Window* render_window, Renderer* renderer) override
-	{
 
-		DrawSystem* system = static_cast<DrawSystem*>(CherryEngine::get_manager()->get_system_manager()->get_system<DrawSystem>().get());
-
-		system->on_draw_call(render_window, renderer);
-		renderer->update_camera();
-
-		//renderer->draw_quad({ 100.f, 100.f, }, { 100.f, 50.f, }, { 1.f, 0.f, 1.f, 1.f });
-
-
-		//printf("DRAW_CALLED\n");
-	}
-	virtual void on_game_event(EventVector events) override
+	virtual void on_event(Event& e) override
 	{
 
 
-		for (auto& e : events)
+	
+		switch (e.type)
 		{
 
+		case EventType::SCROLL:
+		{
 
-
-			switch (e.type)
-			{
-
-			case EventType::SCROLL:
-			{
-
-				//std::cout << e.scroll_ev.y_offset << std::endl;
-				break;
-			}
-
-			case EventType::WINDOW_RESIZE:
-			{
-
-				////window->set_size(e.window_res_ev.w, e.window_res_ev.h);
-				//std::cout << e.window_res_ev.w << " " << e.window_res_ev.h << std::endl;
-				//ortho_cam->resize(0, e.window_res_ev.w, 0, e.window_res_ev.h);
-				break;
-			}
-
-			case EventType::FRAMEBUFFER_RESIZE:
-			{
-				//std::cout << e.frame_buf_res_ev.w << " " << e.frame_buf_res_ev.h << std::endl;
-				ortho_cam->resize(0, e.frame_buf_res_ev.w, 0, e.frame_buf_res_ev.h);
-				break;
-			}
-
-			case EventType::KEYBOARD:
-			{
-
-				if (e.keyboard_ev.key == GLFW_KEY_F)
-				{
-
-
-				}
-				break;
-			}
-
-			default:
-				break;
-			}
+			//std::cout << e.scroll_ev.y_offset << std::endl;
+			break;
 		}
+
+		case EventType::WINDOW_RESIZE:
+		{
+
+			////window->set_size(e.window_res_ev.w, e.window_res_ev.h);
+			//std::cout << e.window_res_ev.w << " " << e.window_res_ev.h << std::endl;
+			//ortho_cam->resize(0, e.window_res_ev.w, 0, e.window_res_ev.h);
+			break;
+		}
+
+		case EventType::FRAMEBUFFER_RESIZE:
+		{
+			//std::cout << e.frame_buf_res_ev.w << " " << e.frame_buf_res_ev.h << std::endl;
+			ortho_cam->resize(0, e.frame_buf_res_ev.w, 0, e.frame_buf_res_ev.h);
+			break;
+		}
+
+		case EventType::KEYBOARD:
+		{
+
+			if (e.keyboard_ev.key == GLFW_KEY_F)
+			{
+
+
+			}
+			break;
+		}
+
+		default:
+			break;
+		}
+		
 
 	}
 

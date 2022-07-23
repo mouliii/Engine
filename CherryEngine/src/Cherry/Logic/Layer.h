@@ -5,12 +5,13 @@ class Layer
 {
 public:
 
-	Layer() { on_init(); }
+	Layer() {}
 	~Layer() { on_destruct(); }
 
 	virtual void on_init() {}
 	virtual void on_update(TimeStep delta_time) {}
-	virtual void on_event(EventVector events) {}
+	virtual void on_event(Event& event) {}
+	virtual void on_loop_end() {}
 	virtual void on_destruct() {}
 
 	protected:

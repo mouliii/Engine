@@ -28,7 +28,7 @@ void Window::wait_events() const
 	glfwWaitEvents();
 }
 
-const std::vector<Event>& Window::get_events() const
+std::vector<Event>& Window::get_events() const
 {
 	return events;
 }

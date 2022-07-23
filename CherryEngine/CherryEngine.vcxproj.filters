@@ -39,10 +39,7 @@
     <ClCompile Include="src\Cherry\OpenGL\Rendering\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Cherry\Logic\CrEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Cherry\Logic\SandBoxBase.cpp">
+    <ClCompile Include="src\Cherry\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Cherry\OpenGL\Devices.cpp">
@@ -137,13 +134,10 @@
     <ClInclude Include="src\Cherry\OpenGL\Rendering\Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Cherry\Logic\CrEngine.h">
+    <ClInclude Include="src\Cherry\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Cherry\Logic\EntityComponentSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Cherry\Logic\SandBoxBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Cherry\OpenGL\Devices.h">
@@ -200,7 +194,7 @@
     <ClInclude Include="src\Cherry\Logic\Systems.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Application.h">
+    <ClInclude Include="src\ExampleLayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Cherry\Logic\Layer.h">
