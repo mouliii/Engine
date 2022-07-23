@@ -2,7 +2,7 @@
 
 QuadBuffer::QuadBuffer()
 	:
-	vbo(nullptr, 4 * 6 * sizeof(float)),
+	vbo(nullptr, 4 * 6 * sizeof(float), GL_DYNAMIC_DRAW),
 	ibo(nullptr, 6)
 {
 	int arr[] = { 0,1,2,0,2,3 };
@@ -22,35 +22,16 @@ QuadBuffer::~QuadBuffer()
 	ibo.unbind();
 }
 
-void QuadBuffer::set_data(std::vector<vec2f> points, vec4f color)
+void QuadBuffer::set_data(std::vector<vec2f>& points, vec4f& color)
 {
-	std::vector<float> data;
-	data.push_back(points[0].x);
-	data.push_back(points[0].y);
-	data.push_back(color.x);
-	data.push_back(color.y);
-	data.push_back(color.z);
-	data.push_back(color.w);
-	data.push_back(points[3].x);
-	data.push_back(points[3].y);
-	data.push_back(color.x);
-	data.push_back(color.y);
-	data.push_back(color.z);
-	data.push_back(color.w);
-	data.push_back(points[2].x);
-	data.push_back(points[2].y);
-	data.push_back(color.x);
-	data.push_back(color.y);
-	data.push_back(color.z);
-	data.push_back(color.w);
-	data.push_back(points[1].x);
-	data.push_back(points[1].y);
-	data.push_back(color.x);
-	data.push_back(color.y);
-	data.push_back(color.z);
-	data.push_back(color.w);// neliö   elementit     floatteja
-	const float vertexDataSize = 4.0f * 6.0f * sizeof(float);
-	vbo.set_data(&data, data.size() * sizeof(float));
+	Vertex data[4];
+	for (size_t i = 0; i < 4; i++)
+	{
+		data[i].pos = { points[i] };
+		data[i].color = { color };
+	}
+	const float vertexDataSize = sizeof(Vertex) * 4;
+	vbo.set_data(0, vertexDataSize, &data[0]);
 }
 
 void QuadBuffer::bind()

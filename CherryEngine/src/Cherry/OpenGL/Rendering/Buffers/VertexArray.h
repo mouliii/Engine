@@ -11,8 +11,6 @@ class VertexArray
 public:
 	VertexArray();
 	~VertexArray();
-
-	void add_vertex_buffer(const VertexBuffer& vb);
 	void bind() const;
 	void unbind() const;
 

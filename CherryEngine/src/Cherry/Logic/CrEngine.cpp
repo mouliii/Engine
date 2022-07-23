@@ -32,10 +32,10 @@ int CherryEngine::i_run()
 	while (!window->window_should_close())
 	{
 
-		
 
 		window->poll_events();
-		/*
+		renderer->clear(); // ei voi clearaa ylimpänä, muuten ei näy mitään
+
 		auto& io = ImGui::GetIO();
 		if (!(io.WantCaptureMouse || io.WantCaptureKeyboard))
 		{
@@ -46,7 +46,7 @@ int CherryEngine::i_run()
 					it.second->on_game_event(events);
 			}	
 		}
-		*/
+		
 		dt = window->get_timestep();
 		for (auto& it : layers)
 		{
@@ -60,8 +60,6 @@ int CherryEngine::i_run()
 		}
 
 	
-		
-
 
 		renderer->display();
 		

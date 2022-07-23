@@ -10,22 +10,14 @@
 class VertexBuffer
 {
 public:
-	VertexBuffer(const void* data, uint32_t size);
-	VertexBuffer();
+	VertexBuffer(const void* data, uint32_t size, GLenum draw_type);
 	~VertexBuffer();
-	void generate_buffer();
-	
-	void set_data(const void* data, uint32_t size);
-	void set_sub_data(const void* data, uint32_t size);
-
-	void set_layout(const BufferLayout& layout);
-	const BufferLayout& get_layout() const;
-
+	void set_data(uint32_t offset, uint32_t size, const void* data);
 	void bind() const;
 	void unbind() const;
 
 private:
 	uint32_t id;
-	BufferLayout layout;
+	GLenum usage;
 };
 

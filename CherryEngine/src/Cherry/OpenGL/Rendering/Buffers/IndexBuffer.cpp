@@ -1,11 +1,5 @@
 #include "IndexBuffer.h"
 
-IndexBuffer::IndexBuffer()
-	:
-	count(0u)
-{
-	glGenBuffers(1, &id);
-}
 
 IndexBuffer::IndexBuffer(const void* data, uint32_t count)
 	:

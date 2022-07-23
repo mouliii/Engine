@@ -48,15 +48,15 @@ public:
 
 		//tri.push_back({ 40.f, -50.f });
 
-		/*
+		
 		Entity triangle = CherryEngine::get_manager()->create_entity("triangle");
 		CherryEngine::get_manager()->add_component(triangle, ShapeComponent{ Polygon(tri) });
 		CherryEngine::get_manager()->add_component(triangle, CollisionComponent{ &CherryEngine::get_manager()->get_component<ShapeComponent>(triangle) });
-		CherryEngine::get_manager()->add_component(triangle, DisplayComponent{ &CherryEngine::get_manager()->get_component<ShapeComponent>(triangle), {1.f, 1.f, 1.f, 1.f}, true });
-
+		//CherryEngine::get_manager()->add_component(triangle, DisplayComponent{ &CherryEngine::get_manager()->get_component<ShapeComponent>(triangle), {1.f, 1.f, 1.f, 1.f}, true });
+		
 		CherryEngine::get_manager()->get_component<CollisionComponent>(triangle).flip_all_bits();
 	//	CherryEngine::get_manager()->get_component<Col 
-		*/
+		
 		
 
 		player_object = CherryEngine::get_manager()->create_entity("player");
@@ -185,8 +185,9 @@ public:
 	
 		system->on_draw_call(render_window, renderer);
 		renderer->update_camera();
-		
-		//renderer->draw_quad({ 100.f, 100.f, }, { 100.f, 50.f, }, { 1.f, 0.f, 1.f, 1.f });
+		std::vector<vec2f> points = { {-20.0f,-20.0f}, {20.0f,-20.0f}, { 20.0f,20.0f }, { -20.0f,20.0f } };
+		vec4f color = { 1.f, 0.f, 1.f, 1.f };
+		renderer->draw_quad(points, color);
 		
 
 		//printf("DRAW_CALLED\n");

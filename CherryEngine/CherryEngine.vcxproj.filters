@@ -93,6 +93,9 @@
     <ClCompile Include="src\Cherry\OpenGL\Rendering\Buffers\QuadBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Cherry\OpenGL\Rendering\Buffers\QuadBufferInstanced.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Cherry\CherryI.h">
@@ -201,6 +204,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Cherry\OpenGL\Rendering\Buffers\QuadBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cherry\OpenGL\Rendering\Buffers\QuadBufferInstanced.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

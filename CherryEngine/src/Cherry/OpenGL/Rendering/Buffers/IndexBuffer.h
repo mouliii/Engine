@@ -6,7 +6,6 @@
 class IndexBuffer
 {
 public:
-	IndexBuffer();
 	IndexBuffer(const void* data, uint32_t count);
 	~IndexBuffer();
 	void set_data(const void* data, uint32_t count);
@@ -17,6 +16,5 @@ public:
 private:
 	uint32_t id;
 	uint32_t count;
-	
 };
 

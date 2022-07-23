@@ -9,7 +9,7 @@ class QuadBuffer
 public:
 	QuadBuffer();
 	~QuadBuffer();
-	void set_data(std::vector<vec2f> points, vec4f color);
+	void set_data(std::vector<vec2f>& points, vec4f& color);
 	void bind();
 	void unbind();
 private:
