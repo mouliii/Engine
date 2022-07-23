@@ -48,6 +48,9 @@
     <ClCompile Include="src\Cherry\OpenGL\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Cherry\Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\Cherry\Logic\Components.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -84,7 +87,9 @@
     <ClCompile Include="src\Cherry\Logic\Systems.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-<<<<<<< HEAD
+    <ClCompile Include="src\Cherry\Logic\LayerManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\Cherry\OpenGL\Rendering\Buffers\QuadBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -95,9 +100,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Cherry\OpenGL\Rendering\Buffers\FrameBuffer.cpp">
-=======
-    <ClCompile Include="src\Cherry\Logic\LayerManager.cpp">
->>>>>>> b341223b66945f14127f05c1d11c1e3300be1b45
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -204,26 +206,19 @@
     <ClInclude Include="src\Cherry\Logic\Systems.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="src\Cherry\OpenGL\Rendering\Buffers\QuadBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Cherry\OpenGL\Rendering\Buffers\QuadBufferInstanced.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Application.h">
-=======
     <ClInclude Include="src\ExampleLayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Cherry\Logic\Layer.h">
+    <ClInclude Include="src\Cherry\OpenGL\Rendering\Buffers\FrameBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Cherry\Logic\LayerManager.h">
->>>>>>> b341223b66945f14127f05c1d11c1e3300be1b45
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Cherry\OpenGL\Rendering\Buffers\FrameBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

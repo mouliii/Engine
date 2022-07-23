@@ -29,15 +29,10 @@
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\Cherry\Logic\Components.cpp" />
-<<<<<<< HEAD
-    <ClCompile Include="src\Cherry\Logic\CrEngine.cpp" />
-    <ClCompile Include="src\Cherry\Logic\SandBoxBase.cpp" />
+    <ClCompile Include="src\Cherry\Application.cpp" />
     <ClCompile Include="src\Cherry\OpenGL\Rendering\Buffers\FrameBuffer.cpp" />
     <ClCompile Include="src\Cherry\OpenGL\Rendering\Buffers\QuadBuffer.cpp" />
     <ClCompile Include="src\Cherry\OpenGL\Rendering\Buffers\QuadBufferInstanced.cpp" />
-=======
-    <ClCompile Include="src\Cherry\Application.cpp" />
->>>>>>> b341223b66945f14127f05c1d11c1e3300be1b45
     <ClCompile Include="src\Cherry\Physics\Shape\Polygon.cpp" />
     <ClCompile Include="src\Cherry\Physics\Shape\Rectangle.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -56,7 +51,6 @@
   <ItemGroup>
     <ClInclude Include="src\Cherry\Logic\LayerManager.h" />
     <ClInclude Include="src\ExampleLayer.h" />
-    <ClInclude Include="src\Cherry\Logic\Layer.h" />
     <ClInclude Include="src\Cherry\Logic\ImGuiLayer.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
