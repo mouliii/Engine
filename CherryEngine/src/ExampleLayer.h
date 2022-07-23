@@ -175,7 +175,7 @@ public:
 	virtual void on_event(Event& e) override
 	{
 
-
+	
 	
 		switch (e.type)
 		{
@@ -203,22 +203,7 @@ public:
 			break;
 		}
 
-		case EventType::KEYBOARD:
-		{
-
-			if (e.keyboard_ev.key == GLFW_KEY_F)
-			{
-
-
-			}
-			break;
 		}
-
-		default:
-			break;
-		}
-		
-
 	}
 
 
