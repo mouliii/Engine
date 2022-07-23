@@ -62,19 +62,29 @@ struct Event
 
 typedef std::vector<Event>& EventVector;
 
-typedef std::function<bool(Event&)> event_func;
-
+//typedef std::function<bool(Event&)> event_func;
+typedef bool(*event_func)(Event&);
 class EventDispatcher
 {
 
 public:
 
-	static void dispatch_event(Event& e, event_func dispatched_fun)
-	{
-		if (dispatched_fun(e))
-		{
-			e.is_handled = true;
-		}
-	}
+	EventDispatcher(Event& e)
+		:
+		e(e)
+	{}
 
+//	template<EventType T>
+	template <EventType T, typename F>
+	void dispatch_event(F dispatched_fun)
+	{
+		if (e.type != T)
+			return;
+		
+		e.is_handled = dispatched_fun(e);
+	
+	}
+	
+private:
+	Event& e;
 };

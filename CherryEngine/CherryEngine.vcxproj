@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Cherry\Logic\LayerManager.h" />
+    <ClInclude Include="src\Cherry\Core.h" />
     <ClInclude Include="src\ExampleLayer.h" />
     <ClInclude Include="src\Cherry\Logic\Layer.h" />
     <ClInclude Include="src\Cherry\Logic\ImGuiLayer.h" />
