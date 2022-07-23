@@ -5,7 +5,9 @@ enum class EventType
 {
 	KEYBOARD=1,
 	MOUSE,
-	SCROLL
+	SCROLL,
+	WINDOW_RESIZE,
+	FRAMEBUFFER_RESIZE
 };
 
 struct KeyboardEvent
@@ -25,6 +27,18 @@ struct MouseEvent
 	int mods;
 };
 
+struct WindowResizeEvent
+{
+	int w;
+	int h;
+};
+
+struct FrameBufferResizeEvent
+{
+	int w;
+	int h;
+};
+
 struct ScrollEvent
 {
 	float x_offset;
@@ -38,6 +52,8 @@ struct Event
 	KeyboardEvent keyboard_ev;
 	MouseEvent mouse_ev;
 	ScrollEvent scroll_ev;
+	WindowResizeEvent window_res_ev;
+	FrameBufferResizeEvent frame_buf_res_ev;
 };
 
 

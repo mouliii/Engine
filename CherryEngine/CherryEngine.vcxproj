@@ -34,7 +34,7 @@
     <ClCompile Include="src\Cherry\OpenGL\Rendering\Buffers\QuadBufferInstanced.cpp" />
     <ClCompile Include="src\Cherry\Physics\Shape\Polygon.cpp" />
     <ClCompile Include="src\Cherry\Physics\Shape\Rectangle.cpp" />
-    <ClCompile Include="src\Manimain.cpp" />
+    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Cherry\OpenGL\Devices.cpp" />
     <ClCompile Include="src\Cherry\OpenGL\Rendering\OrthoCamera.cpp" />
     <ClCompile Include="src\Cherry\OpenGL\Rendering\Buffers\BufferLayout.cpp" />
@@ -48,6 +48,7 @@
     <ClCompile Include="src\Cherry\Logic\Systems.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\Cherry\Logic\ImGuiLayer.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
