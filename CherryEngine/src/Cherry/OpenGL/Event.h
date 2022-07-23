@@ -60,12 +60,7 @@ struct Event
 };
 
 
-<<<<<<< HEAD
-typedef const std::vector<Event>& EventVector;
-=======
 typedef std::vector<Event>& EventVector;
->>>>>>> layersystem
-
 
 typedef std::function<bool(Event&)> event_func;
 
@@ -82,8 +77,4 @@ public:
 		}
 	}
 
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> layersystem
