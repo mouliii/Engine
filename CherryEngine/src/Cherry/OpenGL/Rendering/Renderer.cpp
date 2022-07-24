@@ -32,7 +32,8 @@ Renderer::Renderer()
 		std::cout << "Failed to load texture" << std::endl;
 	}
 	stbi_image_free(data);
-	std::vector<vec2f> p{ vec2f(0.0f,0.0f), vec2f(800.0f,0.0f), vec2f(800.0f,600.0f), vec2f(0.0f,600.0f) };
+	std::vector<vec2f> p{ vec2f(-1.0f,-1.0f), vec2f(1.0f,-1.0f), vec2f(1.0f,1.0f), vec2f(-1.0f,1.0f) };
+	//std::vector<vec2f> p{ vec2f(0.0f,0.0f), vec2f(800.0f,0.0f), vec2f(800.0f,600.0f), vec2f(0.0f,600.0f) };
 	vec4f c = { 1.f, 1.f, 1.f, 1.f };
 	display_buffer.set_data(p,c);
 }
@@ -90,7 +91,6 @@ void Renderer::end_batch()
 	display_buffer.bind();
 
 	display_shader.set_uniform1i("u_Texture", 1);
-	display_shader.set_uniform4fv("view_proj", ortho_cam->get_view_projection_matrix());
 
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
