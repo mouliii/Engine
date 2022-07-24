@@ -137,10 +137,18 @@ public:
 		
 	}
 
+	bool on_framebuffer_resize(Event& e)
+	{
+ 		ortho_cam->resize(0, (float)e.frame_buf_res_ev.w, 0, (float)e.frame_buf_res_ev.h);
+		return true;
+	}
+
 	virtual void on_event(Event& e) override
 	{
-
-
+		EventDispatcher frame_buffer_resize(e);
+	//	auto fn = std::bind(&ExampleLayer::on_framebuffer_resize, *this, e);
+		frame_buffer_resize.dispatch_event<EventType::FRAMEBUFFER_RESIZE>(BIND_EVENT_FN(ExampleLayer::on_framebuffer_resize));
+	
 	
 		switch (e.type)
 		{
@@ -164,27 +172,13 @@ public:
 		case EventType::FRAMEBUFFER_RESIZE:
 		{
 			//std::cout << e.frame_buf_res_ev.w << " " << e.frame_buf_res_ev.h << std::endl;
-			ortho_cam->resize(0, e.frame_buf_res_ev.w, 0, e.frame_buf_res_ev.h);
-			break;
+			
 		}
 
-		case EventType::KEYBOARD:
-		{
-
-			if (e.keyboard_ev.key == GLFW_KEY_F)
-			{
-
-
-			}
-			break;
 		}
-
-		default:
-			break;
-		}
-		
-
 	}
+
+	
 
 
 
