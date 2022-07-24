@@ -72,4 +72,6 @@ private:
 	ECSManager* manager;
 
 	LayerManager* layer_manager;
+
+
 }; 

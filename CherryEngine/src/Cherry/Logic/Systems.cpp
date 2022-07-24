@@ -233,7 +233,7 @@ vec2f CollisionSystem::find_center(const std::vector<vec2f>& vertices)
 		v += vertices[i];
 	}
 
-	v /= vertices.size();
+	v /= (float)vertices.size();
 	return v;
 
 }

@@ -74,7 +74,7 @@ public:
 		e(e)
 	{}
 
-//	template<EventType T>
+
 	template <EventType T, typename F>
 	void dispatch_event(F dispatched_fun)
 	{

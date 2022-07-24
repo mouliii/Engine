@@ -174,7 +174,7 @@ public:
 
 	bool on_framebuffer_resize(Event& e)
 	{
-		ortho_cam->resize(0, e.frame_buf_res_ev.w, 0, e.frame_buf_res_ev.h);
+ 		ortho_cam->resize(0, (float)e.frame_buf_res_ev.w, 0, (float)e.frame_buf_res_ev.h);
 		return true;
 	}
 

@@ -33,7 +33,7 @@ const uint32_t BufferLayout::get_stride() const
 
 const uint32_t BufferLayout::get_attribute_count() const
 {
-	return elements.size();
+	return (uint32_t)elements.size();
 }
 
 const std::vector<Attribute>& BufferLayout::get_attributes() const

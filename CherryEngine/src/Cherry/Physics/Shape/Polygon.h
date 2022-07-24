@@ -33,6 +33,7 @@ inline ShapeType string_to_shape_type(const std::string& name)
 		if (it.second == name)
 			return it.first;
 	}
+	return ShapeType::None;
 }
 
 inline std::vector<std::string> get_shapes_as_string()
