@@ -60,7 +60,13 @@ void ImGuiLayer::entity_tree()
 		entities.insert(i.second->entities.begin(), i.second->entities.end());
 	}
 	
-	
+	ImGui::Begin("asd");
+
+	//auto tex_id = ImTextureID(CherryEngine::get_renderer()->get_frame_buffer_tex());
+	//(void*)(intptr_t)CherryEngine::get_renderer()->get_frame_buffer_tex()
+	ImGui::Image((void*)(intptr_t)CherryEngine::get_renderer()->get_frame_buffer_tex(), { 400.f, 300.f });
+
+	ImGui::End();
 
 	ImGui::Begin("entities");
 

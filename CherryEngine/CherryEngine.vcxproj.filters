@@ -102,6 +102,9 @@
     <ClCompile Include="src\Cherry\OpenGL\Rendering\Buffers\FrameBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Cherry\Logic\stb_image.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Cherry\CherryI.h">
@@ -221,9 +224,14 @@
     <ClInclude Include="src\Cherry\Logic\LayerManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Cherry\Logic\stb_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\fragment_shader.shader" />
     <None Include="resources\shaders\vertex_shader.shader" />
+    <None Include="resources\shaders\display_vertex.glsl" />
+    <None Include="resources\shaders\display_fragment.glsl" />
   </ItemGroup>
 </Project>

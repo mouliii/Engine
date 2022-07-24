@@ -82,6 +82,7 @@ public:
 	}
 	virtual void on_update(TimeStep delta_time) override
 	{
+
 		CollisionComponent& collider = CherryEngine::get_manager()->get_component<CollisionComponent>(player_object);
 		//ShapeComponent& shape = player_object->get_component<ShapeComponent>();
 		ShapeComponent& shape = CherryEngine::get_manager()->get_component<ShapeComponent>(player_object);
@@ -130,7 +131,7 @@ public:
 
 
 		CherryEngine::get_renderer()->update_camera();
-
+		
 		DrawSystem* dsystem = static_cast<DrawSystem*>(CherryEngine::get_manager()->get_system_manager()->get_system<DrawSystem>().get());
 		dsystem->on_draw_call(CherryEngine::get_render_window(), CherryEngine::get_renderer());
 		

@@ -31,10 +31,9 @@ int CherryEngine::i_run()
 
 	while (!window->window_should_close())
 	{
-
-
+		renderer->clear();
+		renderer->begin_batch();
 		window->poll_events();
-		renderer->clear(); // ei voi clearaa ylimpänä, muuten ei näy mitään
 
 		auto& io = ImGui::GetIO();
 		if (!(io.WantCaptureMouse || io.WantCaptureKeyboard))
@@ -60,20 +59,15 @@ int CherryEngine::i_run()
 		{
 			layer->on_update(dt);
 		}
-
-
-	
-
-		renderer->display();
 		
+		renderer->end_batch();
+		// imgui
 		for (auto* layer : layer_manager->layers)
 		{
 			layer->on_loop_end();
 		}
-
-
-
-
+		// full frame swap - draw
+		glfwSwapBuffers(window->_get_glfw_window());
 	}
 	return 0;
 }

@@ -19,6 +19,7 @@ FrameBuffer::~FrameBuffer()
 
 void FrameBuffer::resize_framebuffer(uint32_t frame_width, uint32_t frame_height)
 {
+	// TODO bind asiat
 	// color buffer
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, frame_width, frame_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -34,18 +35,18 @@ void FrameBuffer::resize_framebuffer(uint32_t frame_width, uint32_t frame_height
 
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		std::cout << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << std::endl;
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);	
 }
 
 void FrameBuffer::bind()
 {
-	glBindFramebuffer(GL_RENDERBUFFER, renderbuffer_id);
+	glBindFramebuffer(GL_FRAMEBUFFER, renderbuffer_id);
 	glEnable(GL_DEPTH_TEST);
 }
 
 void FrameBuffer::unbind()
 {
-	glBindFramebuffer(GL_RENDERBUFFER, 0);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glDisable(GL_DEPTH_TEST);
 }
 

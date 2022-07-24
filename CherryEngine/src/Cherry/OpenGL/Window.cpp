@@ -18,14 +18,12 @@ bool Window::window_should_close() const
 void Window::poll_events() const
 {
 	events.clear();
-	glfwSwapBuffers(this->gl_window);
 	glfwPollEvents();
 }
 
 void Window::wait_events() const
 {
-	glfwSwapBuffers(this->gl_window);
-	glfwWaitEvents();
+	glfwWaitEvents();	
 }
 
 std::vector<Event>& Window::get_events() const

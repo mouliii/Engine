@@ -8,12 +8,7 @@
 
 struct Vertex
 {
-	struct
-	{
-		vec2f pos;
-	}pos;
-	struct
-	{
-		vec4f color;
-	}color;
+	vec2f pos;
+	vec4f color;
+	vec2f uv;
 };

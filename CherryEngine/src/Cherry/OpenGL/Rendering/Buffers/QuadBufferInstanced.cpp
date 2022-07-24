@@ -26,11 +26,14 @@ QuadBufferInstanced::QuadBufferInstanced(uint32_t instance_count, GLenum draw_ty
 
 	ibo.set_data(indexBufferData, indexCount);
 
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 6 * sizeof(float), 0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), 0);
 	glEnableVertexAttribArray(0);
 
-	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (const void*)(2 * sizeof(float)));
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (const void*)(2 * sizeof(float)));
 	glEnableVertexAttribArray(1);
+
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (const void*)(6 * sizeof(float)));
+	glEnableVertexAttribArray(2);
 
 	delete[] indexBufferData;
 }
@@ -50,6 +53,11 @@ void QuadBufferInstanced::set_data(std::vector<vec2f>& points, vec4f& color)
 		data[i].pos = { points[i] };
 		data[i].color = { color };
 	}
+	data[0].uv = vec2f(0, 0);
+	data[1].uv = vec2f(1, 0);
+	data[2].uv = vec2f(1, 1);
+	data[3].uv = vec2f(0, 1);
+
 	const float vertexDataSize = sizeof(Vertex) * 4;
 	vbo.set_data(instanceCount * vertexDataSize, vertexDataSize, &data[0]);
 	instanceCount++;
