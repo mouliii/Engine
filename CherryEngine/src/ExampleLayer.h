@@ -69,16 +69,16 @@ public:
 		//player_object->get_component<CollisionComponent>().flip_collision_mask_bit(0);
 		//player_object->get_component<CollisionComponent>().flip_collision_mask_bit(1);
 		
-		for (size_t i = 0; i < 100; i++)
-		{
-			Entity triangle = CherryEngine::get_manager()->create_entity("triangle");
-			CherryEngine::get_manager()->add_component(triangle, ShapeComponent{ Rectangle(
-				{(float)(rand() % 4000 - 2000), (float)(rand() % 4000 - 2000)},
-				{(float)(rand() % 200), (float)(rand() % 200)}
-				) });
-			//CherryEngine::get_manager()->add_component(triangle, CollisionComponent{ &CherryEngine::get_manager()->get_component<ShapeComponent>(player_object) });
-			CherryEngine::get_manager()->add_component(triangle, DisplayComponent{ &CherryEngine::get_manager()->get_component<ShapeComponent>(player_object), {1.f, 1.f, 1.f, 1.f}, true });
-		}
+		//for (size_t i = 0; i < 100; i++)
+		//{
+		//	Entity triangle = CherryEngine::get_manager()->create_entity("triangle");
+		//	CherryEngine::get_manager()->add_component(triangle, ShapeComponent{ Rectangle(
+		//		{(float)(rand() % 4000 - 2000), (float)(rand() % 4000 - 2000)},
+		//		{(float)(rand() % 200), (float)(rand() % 200)}
+		//		) });
+		//	//CherryEngine::get_manager()->add_component(triangle, CollisionComponent{ &CherryEngine::get_manager()->get_component<ShapeComponent>(player_object) });
+		//	CherryEngine::get_manager()->add_component(triangle, DisplayComponent{ &CherryEngine::get_manager()->get_component<ShapeComponent>(player_object), {1.f, 1.f, 1.f, 1.f}, true });
+		//}
 	}
 	virtual void on_update(TimeStep delta_time) override
 	{

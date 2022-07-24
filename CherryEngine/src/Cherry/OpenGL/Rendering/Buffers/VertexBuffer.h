@@ -4,7 +4,7 @@
 
 
 #include "GL/glew.h"
-#include "BufferLayout.h"
+
 
 
 class VertexBuffer

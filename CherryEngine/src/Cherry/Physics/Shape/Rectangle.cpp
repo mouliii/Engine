@@ -27,8 +27,8 @@ vec2f Rectangle::get_size()
 
 	vec2f dimensions;
 
-	dimensions.x = (global_points[3] - global_points[0]).lenght();
-	dimensions.y = (global_points[1] - global_points[0]).lenght();
+	dimensions.x = (global_points[1] - global_points[0]).lenght();
+	dimensions.y = (global_points[3] - global_points[0]).lenght();
 	
 	return dimensions;
 }

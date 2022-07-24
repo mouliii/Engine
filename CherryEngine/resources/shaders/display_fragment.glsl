@@ -8,6 +8,6 @@ uniform sampler2D u_Texture;
 
 void main()
 {
-	vec3 albedo = vec3(1.0f) -  texture(u_Texture, v_uv).rgb;
-	frag_color = vec4(albedo,1.0);
+	//vec3 albedo = vec3(1.0f) -  texture(u_Texture, v_uv).rgb;
+	frag_color = texture(u_Texture, v_uv);
 }

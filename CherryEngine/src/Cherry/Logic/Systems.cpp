@@ -17,10 +17,12 @@ void DrawSystem::on_draw_call(Window* render_window, Renderer* renderer)
 
 void CollisionSystem::on_game_tick(TimeStep delta_time)
 {
+	
 	for (const auto& entity : entities)
 	{
 		for (auto* collision : CherryEngine::get_manager()->get_component<CollisionComponent>(entity).collision_informations)
 		{
+			
 			move_and_collide(entity, collision->resolution);
 			delete collision;
 		}
@@ -56,7 +58,7 @@ bool CollisionSystem::move_and_collide(Entity entity, vec2f translation)
 
 		CollisionComponent* cc2 = &CherryEngine::get_manager()->get_component<CollisionComponent>(entity2);
 
-
+		
 		if (!same_bit_comparison(cc2->collision_mask, cc1->collision_mask))
 			continue;
 
@@ -68,7 +70,7 @@ bool CollisionSystem::move_and_collide(Entity entity, vec2f translation)
 
 		if (!AABB(rect1, rect2))
 			continue;
-
+	
 		vec2f normal;
 		float depth;
 		if (polygon_intersect(cc1, cc2, normal, depth))
