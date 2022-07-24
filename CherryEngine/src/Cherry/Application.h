@@ -2,6 +2,8 @@
 #include <unordered_map>
 #include <memory>
 
+#include "Core.h"
+
 #include "Logic/LayerManager.h"
 #include "Logic/Components.h"
 #include "Logic/EntityComponentSystem.h"
@@ -9,10 +11,11 @@
 #include "Physics/Shape/Polygon.h"
 #include "../../imgui/imgui.h"
 
+
+
 class CherryEngine
 {
 public:
-
 
 	CherryEngine(const CherryEngine&) = delete;
 
@@ -69,4 +72,6 @@ private:
 	ECSManager* manager;
 
 	LayerManager* layer_manager;
+
+
 }; 

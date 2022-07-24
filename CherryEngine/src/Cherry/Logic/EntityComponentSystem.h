@@ -105,8 +105,8 @@ public:
 	void remove_data(Entity entity)
 	{
 
-		uint32_t index_of_removed_entity = entity_index_map[entity];
-		uint32_t last_element = size - 1;
+		size_t index_of_removed_entity = entity_index_map[entity];
+		size_t last_element = size - 1;
 		component_array[index_of_removed_entity] = component_array[last_element];
 
 		Entity entity_of_last_element = index_entity_map[last_element];

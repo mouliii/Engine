@@ -164,8 +164,8 @@ void Window::scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 	Event e;
 	e.type = EventType::SCROLL;
 
-	e.scroll_ev.x_offset = xoffset;
-	e.scroll_ev.y_offset = yoffset;
+	e.scroll_ev.x_offset = (float)xoffset;
+	e.scroll_ev.y_offset = (float)yoffset;
 
 	events.push_back(e);
 
